@@ -83,3 +83,12 @@ Example:
 ``` html
  <a-entity gltf-model="#model" id="model_1" webar-loadmonitor="elType: obj"></a-entity>
 ```
+
+## Usage
+
+Once the application is loaded on the mobile browser, you 'll see
+
+  1. A loading progress bar while loading the scripts and assets
+  2. Webcam view with a hand animation guide.
+  3. Move the phone slowly left and right while the camera is looking at a textured/patterned surface. It should not be shiny, over-bright or low-light.
+  4. When the surface is detected, a 3d model 'll appear on the surface.
