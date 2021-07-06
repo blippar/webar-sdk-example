@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Blippar WebAR">
+    <meta name="apple-mobile-web-app-title" content="Blippar WebAR">
+    <meta name="msapplication-TileColor" content="#DA532C">
+    <meta name="msapplication-config" content="icons/browserconfig.xml">
+    <meta name="description" content="Blippar WebAR">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta id="theme-color" name="theme-color" content="#FFFFFF">
+
+    <!-- Link to site manifest -->
+    <link rel="manifest" href="webar-sdk/icons/site.webmanifest">
+
+    <!-- Links to icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+    <link rel="mask-icon" href="webar-sdk/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="webar-sdk/icons/favicon.ico">
+
+    <base target="_blank">
+
+    <title>Blippar WebAR Demo</title>
+  </head>
+
+
+  <script src="./webar-sdk/blippar-webar.0f47e769.js"></script>
+
+
+    <body>
+      <a-scene
+        webar-scene="key: xxxxxxxx-1111-2222-3333-yyyyyyyyyyyy"
+        vr-mode-ui="enabled: false"
+        device-orientation-permission-ui="enabled: false"
+        loading-screen="enabled: false"
+        light="defaultLightsEnabled: false"
+        renderer="antialias: true; colorManagement: true; sortObjects: false; precision: high; logarithmicDepthBuffer: false; physicallyCorrectLights: false;">
+
+        <a-entity
+          webar-camera
+          camera="fov: 80; zoom: 1;"
+          wasd-controls-enabled="false"
+          look-controls="enabled: true; touchEnabled: false;"></a-entity>
+
+        <a-assets timeout="60000">
+          <a-asset-item id="shoe" src="webar-sdk/models/MaterialsVariantsShoe.glb"></a-asset-item>
+        </a-assets>
+
+        <a-entity webar-stage>
+          <a-entity gltf-model="#shoe" id="shoe_1" rotation="0 0 0" position="0 0 0" scale="5 5 5" webar-loadmonitor="elType: glb"></a-entity>
+          <a-entity webar-loadmonitor></a-entity>
+          <!-- Add here any AR models to display -->
+        </a-entity>
+
+        <a-entity light="type: ambient; color: #EEE; intensity: 0.75"></a-entity>
+        <a-entity light="type: directional; color: #FFF; intensity: 1.0; castShadow: false;" position="-0.5 1 1"></a-entity>
+      </a-scene>
+  </body>
+</html>
