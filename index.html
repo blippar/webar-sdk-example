@@ -13,10 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta id="theme-color" name="theme-color" content="#FFFFFF">
 
-    <!-- Link to site manifest -->
     <link rel="manifest" href="webar-sdk/icons/site.webmanifest">
-
-    <!-- Links to icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
@@ -28,11 +25,14 @@
     <title>Blippar WebAR Demo</title>
   </head>
 
+  <!-- Step 1: Include WebAR-sdk script -->
 
   <script src="./webar-sdk/blippar-webar.21dbd8ac.js"></script>
 
 
     <body>
+      <!-- Step 2: Add webar-scene attribute to AFrame's <a-scene> tag -->
+        <!-- Provide a valid Blippar license-key value in the key: property  -->
       <a-scene
         webar-scene="key: xxxxxxxx-1111-2222-3333-yyyyyyyyyyyy"
         vr-mode-ui="enabled: false"
@@ -41,6 +41,8 @@
         light="defaultLightsEnabled: false"
         renderer="antialias: true; colorManagement: true; sortObjects: false; precision: high; logarithmicDepthBuffer: false; physicallyCorrectLights: false;">
 
+        <!-- Step 3: Add webar-camera attribute to AFrame's <a-entity camera> tag -->
+          <!-- Do not change the default values of fov and zoom properties -->
         <a-entity
           webar-camera
           camera="fov: 80; zoom: 1;"
@@ -51,10 +53,13 @@
           <a-asset-item id="shoe" src="webar-sdk/models/MaterialsVariantsShoe.glb"></a-asset-item>
         </a-assets>
 
+        <!-- Step 4: Add webar-stage attribute to an AFrame's parent <a-entity> tag -->
         <a-entity webar-stage>
+
+          <!-- Step 5: Add AR models under the webar-stage node -->
+            <!-- Add webar-loadmonitor attribute to the entities to display loading progress screen before starting the surface tracking -->
           <a-entity gltf-model="#shoe" id="shoe_1" rotation="0 0 0" position="0 0 0" scale="5 5 5" webar-loadmonitor="elType: glb"></a-entity>
-          <a-entity webar-loadmonitor></a-entity>
-          <!-- Add here any AR models to display -->
+
         </a-entity>
 
         <a-entity light="type: ambient; color: #EEE; intensity: 0.75"></a-entity>

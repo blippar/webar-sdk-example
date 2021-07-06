@@ -1,3 +1,84 @@
-# webar-sdk-example
+# WebAR-sdk Example
 
-[Live Demo](https://webar-sdk.blippar.com/ "WebAR-SDK Example Live Demo")
+Try [Live Demo](https://webar-sdk.blippar.com/ "WebAR-sdk Example Live Demo") here.
+
+Create your own Surface tracking web app using these simple steps using AFRAME.
+
+## Step 1
+
+- Include **WebAR-sdk** script (available in `webar-sdk` folder) before the `<body>` tag.
+  - **WebAR-sdk** script is already bundled with
+    - aframe version 1.2.0
+    - aframe-extras version 6.1.1
+
+``` html
+  <script src="./webar-sdk/blippar-webar.21dbd8ac.js"></script>
+```
+
+## Step 2
+
+- Add **webar-scene** attribute to AFrame's <a-scene> tag
+- Provide a valid Blippar license-key value in the `key:` property
+
+``` html
+      <a-scene
+        webar-scene="key: xxxxxxxx-1111-2222-3333-yyyyyyyyyyyy"
+        vr-mode-ui="enabled: false"
+        device-orientation-permission-ui="enabled: false"
+        loading-screen="enabled: false"
+        light="defaultLightsEnabled: false"
+        renderer="antialias: true; colorManagement: true; sortObjects: false; precision: high; logarithmicDepthBuffer: false; physicallyCorrectLights: false;">
+```
+
+## Step 3
+
+- Add **webar-camera** attribute to AFrame's `<a-entity camera>` tag
+  - Do not change the default values of fov and zoom properties
+
+``` html
+        <a-entity
+          webar-camera
+          camera="fov: 80; zoom: 1;"
+          wasd-controls-enabled="false"
+          look-controls="enabled: true; touchEnabled: false;"></a-entity>
+```
+
+## Step 4
+
+- Add **webar-stage** attribute to an AFrame's parent `<a-entity>` tag
+
+``` html
+        <a-entity webar-stage>
+            Step 5: ...
+        </a-entity>
+```
+
+## Step 5
+
+- Add AR models under the **webar-stage** node.
+  - Add **webar-loadmonitor** attribute to the entities to display loading progress screen before starting the surface tracking. Look more for webar-loadmonitor properties table.
+
+``` html
+        <a-entity webar-stage>
+          <a-entity gltf-model="#shoe" id="shoe_1" rotation="0 0 0" position="0 0 0" scale="5 5 5" webar-loadmonitor="elType: glb"></a-entity>
+        </a-entity>
+```
+
+### webar-loadmonitor Attribute
+
+- To monitor the loaded state of an AFrame entity `webar-loadmonitor` attribute's `elType` property should specify the appropriate type.
+
+| elType         | AFrame's Event listened |
+|----------------|-------------------------|
+| glb            | model-loaded            |
+| obj            | model-loaded            |
+| asset          | loaded                  |
+| texture        | materialtextureloaded   |
+| video          | materialvideoloadeddata |
+| none           | Waits for 500 ms  |
+
+Example:
+
+``` html
+ <a-entity gltf-model="#model" id="model_1" webar-loadmonitor="elType: obj"></a-entity>
+```
