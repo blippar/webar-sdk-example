@@ -2,7 +2,6 @@
 
 Try [Live Demo](https://webar-sdk.blippar.com/ "WebAR-sdk Example Live Demo") on your mobile browser. Supports Android Chrome and iOS Safari.
 
-
 Create your own Surface tracking web app using these simple steps using AFRAME.
 
 ## Step 1
@@ -18,7 +17,7 @@ Create your own Surface tracking web app using these simple steps using AFRAME.
 
 ## Step 2
 
-- Add **webar-scene** attribute to AFrame's <a-scene> tag
+- Add **webar-scene** attribute to AFrame's `<a-scene>` tag
 - Provide a valid Blippar license-key value in the `key:` property
 
 ``` html
@@ -50,7 +49,7 @@ Create your own Surface tracking web app using these simple steps using AFRAME.
 
 ``` html
         <a-entity webar-stage>
-            Step 5: ...
+            <!-- Read Step 5 to place AR models here -->
         </a-entity>
 ```
 
@@ -76,7 +75,7 @@ Create your own Surface tracking web app using these simple steps using AFRAME.
 | asset          | loaded                  |
 | texture        | materialtextureloaded   |
 | video          | materialvideoloadeddata |
-| none           | Waits for 500 ms  |
+| none           | Waits for 500 ms        |
 
 Example:
 
