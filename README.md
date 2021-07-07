@@ -83,6 +83,21 @@ Example:
  <a-entity gltf-model="#model" id="model_1" webar-loadmonitor="elType: obj"></a-entity>
 ```
 
+## Installation
+
+Host it on a **HTTPS** server. SSL is must to access the webcamera on a mobile browser. Make sure the root/document folder of HTTPS server looks like this:
+
+| /root       |
+|-------------|
+|  index.html |
+|  webar-sdk  |
+
+You `https://example.com/` points to **/root** folder and load the url on your mobile browser - Android Chrome or iOS Safari.
+
+``` Note
+ !!! Known issue: Hosting it  on a subfolder path like https://example.com/surface/ is not supported in this Alpha release.
+```
+
 ## Usage
 
 Once the application is loaded on the mobile browser, you 'll see
@@ -91,3 +106,10 @@ Once the application is loaded on the mobile browser, you 'll see
   2. Webcam view with a hand animation guide.
   3. Move the phone slowly left and right while the camera is looking at a textured/patterned surface. It should not be shiny, over-bright or low-light.
   4. When the surface is detected, a 3d model 'll appear on the surface.
+
+## Known Issues
+
+  1. Hosting it  on a subfolder path like `https://example.com/surface/` is not supported in this Alpha release.
+  2. When looking around the 3D object, the object rotates incorrectly.
+  3. Sometimes the object moves along with the phone.
+  4. Slowness on iOS Safari browser.
