@@ -1,4 +1,4 @@
-# WebAR-sdk Example
+# WebAR-SDK Example
 
 Try [Live Demo](https://webar-sdk.blippar.com/ "WebAR-sdk Example Live Demo") on your mobile browser. Supports Android Chrome and iOS Safari.
 
