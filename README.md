@@ -1,4 +1,4 @@
-# WebAR-sdk Example
+# WebAR-SDK Example
 
 Try [Live Demo](https://webar-sdk.blippar.com/ "WebAR-sdk Example Live Demo") on your mobile browser. Supports Android Chrome and iOS Safari.
 
@@ -107,9 +107,8 @@ Once the application is loaded on the mobile browser, you 'll see
   3. Move the phone slowly left and right while the camera is looking at a textured/patterned surface. It should not be shiny, over-bright or low-light.
   4. When the surface is detected, a 3d model 'll appear on the surface.
 
-## Known Issues
+## Known Issues ( Fixes in progress and will be available soon within alpha)
 
-  1. Hosting it  on a subfolder path like `https://example.com/surface/` is not supported in this Alpha release.
-  2. When looking around the 3D object, the object rotates incorrectly.
-  3. Sometimes the object moves along with the phone.
-  4. Slowness on iOS Safari browser.
+  1. Hosting it  on a subfolder path like `https://example.com/surface/` is not curently supported in this version of Alpha release.
+  2. When looking around the 3D object, the object rotation may be slighltly inaccurate sometimes.
+  3. There is a little slowness seen on latest iOS Safari browser version, this is being looked at. 
