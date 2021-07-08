@@ -85,14 +85,8 @@ Example:
 
 ## Installation
 
-Host it on a **HTTPS** server. SSL is must to access the webcamera on a mobile browser. Make sure the root/document folder of HTTPS server looks like this:
-
-| /root       |
-|-------------|
-|  index.html |
-|  webar-sdk  |
-
-You `https://example.com/` points to **/root** folder and load the url on your mobile browser - Android Chrome or iOS Safari.
+- Host `index.html` and `webar-sdk` folder on a **HTTPS** server. SSL is must to access the webcamera on a mobile browser.
+- Load the url on your mobile browser - Android Chrome or iOS Safari.
 
 ## Usage
 
