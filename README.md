@@ -94,10 +94,6 @@ Host it on a **HTTPS** server. SSL is must to access the webcamera on a mobile b
 
 You `https://example.com/` points to **/root** folder and load the url on your mobile browser - Android Chrome or iOS Safari.
 
-``` Note
- !!! Known issue: Hosting it  on a subfolder path like https://example.com/surface/ is not supported in this Alpha release.
-```
-
 ## Usage
 
 Once the application is loaded on the mobile browser, you 'll see
@@ -109,6 +105,5 @@ Once the application is loaded on the mobile browser, you 'll see
 
 ## Known Issues ( Fixes in progress and will be available soon within alpha)
 
-  1. Hosting it  on a subfolder path like `https://example.com/surface/` is not curently supported in this version of Alpha release.
-  2. When looking around the 3D object, the object rotation may be slighltly inaccurate sometimes.
-  3. There is a little slowness seen on latest iOS Safari browser version, this is being looked at. 
+  1. When looking around the 3D object, the object rotation may be slighltly inaccurate sometimes.
+  2. There is a little slowness seen on latest iOS Safari browser version, this is being looked at. 
