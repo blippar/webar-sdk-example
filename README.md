@@ -100,4 +100,3 @@ Once the application is loaded on the mobile browser, you 'll see
 ## Known Issues ( Fixes in progress and will be available soon within alpha)
 
   1. When looking around the 3D object, the object rotation may be slighltly inaccurate sometimes.
-  2. There is a little slowness seen on latest iOS Safari browser version, this is being looked at. 
