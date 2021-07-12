@@ -97,6 +97,3 @@ Once the application is loaded on the mobile browser, you 'll see
   3. Move the phone slowly left and right while the camera is looking at a textured/patterned surface. It should not be shiny, over-bright or low-light.
   4. When the surface is detected, a 3d model 'll appear on the surface.
 
-## Known Issues ( Fixes in progress and will be available soon within alpha)
-
-  1. When looking around the 3D object, the object rotation may be slighltly inaccurate sometimes.
