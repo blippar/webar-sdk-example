@@ -97,3 +97,6 @@ Once the application is loaded on the mobile browser, you 'll see
   3. Move the phone slowly left and right while the camera is looking at a textured/patterned surface. It should not be shiny, over-bright or low-light.
   4. When the surface is detected, a 3d model 'll appear on the surface.
 
+## Known Issues
+  1. Anchoring the 3D object gets delayed, if the hand is moved faster during Anchoring(when phone guide animation is displayed).
+  2. Sometimes size of the object changes when looking around the 3D object.
