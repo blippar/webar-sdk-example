@@ -1,6 +1,6 @@
 # WebAR-SDK Example
 
-Try [Live Demo](https://webar-sdk.blippar.com/ "WebAR-sdk Example Live Demo") on your mobile browser. Supports Android Chrome and iOS Safari.
+Try [Live Demo](https://webar-sdk.blippar.com/v1.0.2-Alpha/index.html "WebAR-sdk Example Live Demo") on your mobile browser. Supports Android Chrome and iOS Safari.
 
 Create your own Surface tracking web app using these simple steps using AFRAME.
 
