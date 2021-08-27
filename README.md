@@ -12,7 +12,7 @@ Create your own Surface tracking web app using these simple steps using AFRAME.
     - aframe-extras version 6.1.1
 
 ``` html
-  <script src="./webar-sdk/blippar-webar.21dbd8ac.js"></script>
+  <script src="webar-sdk/blippar-webar.4bb53151.js"></script>
 ```
 
 ## Step 2
