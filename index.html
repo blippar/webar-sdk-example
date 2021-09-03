@@ -27,7 +27,30 @@
 
   <!-- Step 1: Include WebAR-sdk script -->
 
-  <script src="webar-sdk/blippar-webar.4bb53151.js"></script>
+  <script src="webar-sdk/blippar-webar.0381d720.js"></script>
+
+
+  <script>
+    // Give a callback when the WebAR Stage <a-entity webar-stage> is ready  to display the 3d object
+    WebARsdk.SetStageReadyCallback(() => {
+      console.info('Stage is ready now!!!');
+    });
+
+    // Give a callback when the device is close to the object
+
+    // closenessRatio is how close to the object, the callback has to be made
+    // 0.25 to 0.4 works better depending on the need
+    // 0.25 is more closer than 0.4
+    let closenessRatio = 0.30;
+    WebARsdk.SetPortalEntryCallback(() => {
+        console.info('Entered the portal');
+
+        let enableGyroCam = true;
+        WebARsdk.DisableTracking(enableGyroCam);
+        console.info('Enabled gyro cam');
+      },
+    closenessRatio);
+  </script>
 
     <body>
       <!-- Step 2: Add webar-scene attribute to AFrame's <a-scene> tag -->
