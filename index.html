@@ -27,7 +27,7 @@
 
   <!-- Step 1: Include WebAR-sdk script -->
 
-  <script src="webar-sdk/blippar-webar.0381d720.js"></script>
+  <script src="webar-sdk/blippar-webar.1ea0091f.js"></script>
 
 
   <script>
@@ -72,7 +72,7 @@
           look-controls="enabled: true; touchEnabled: false;"></a-entity>
 
         <a-assets timeout="60000">
-          <a-asset-item id="shoe" src="webar-sdk/models/MaterialsVariantsShoe.glb"></a-asset-item>
+          <a-asset-item id="astronaut" src="webar-sdk/models/astronaut.glb"></a-asset-item>
         </a-assets>
 
         <!-- Step 4: Add webar-stage attribute to an AFrame's parent <a-entity> tag -->
@@ -80,7 +80,7 @@
 
           <!-- Step 5: Add AR models under the webar-stage node -->
             <!-- Add webar-loadmonitor attribute to the entities to display loading progress screen before starting the surface tracking -->
-          <a-entity gltf-model="#shoe" id="shoe_1" rotation="0 0 0" position="0 0 0" scale="5 5 5" webar-loadmonitor="elType: glb"></a-entity>
+          <a-entity gltf-model="#astronaut" id="astronaut_1" rotation="0 0 0" position="0 0 0" scale="0.25 0.25 0.25" webar-loadmonitor="elType: glb"></a-entity>
 
         </a-entity>
 
