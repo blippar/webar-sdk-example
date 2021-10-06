@@ -12,7 +12,7 @@ Supports Android Chrome and iOS Safari.
 
 
 [myfirst-webar-demo-url]: https://webar-sdk.blippar.com/webar-sdk-example/myfirst-webar/index.html "Live Demo"
-[myfirst-webar-demo-gif]: https://webar-sdk.blippar.com/webar-sdk-example/demo-gif/myfirst_webar_screen.gif "myfirst-webar"
+[myfirst-webar-demo-gif]: https://github.com/blippar/webar-sdk-example/raw/main/assets/myfirst_webar_demo.gif "myfirst-webar"
 
 [portal-webar-demo-url]: https://webar-sdk.blippar.com/webar-sdk-example/portal-webar/index.html "Live Demo"
-[portal-webar-demo-gif]: https://webar-sdk.blippar.com/webar-sdk-example/demo-gif/short_portal_demo_screen_4.gif "portal-webar"
+[portal-webar-demo-gif]: https://github.com/blippar/webar-sdk-example/raw/main/assets/portal_webar_demo.gif "portal-webar"
