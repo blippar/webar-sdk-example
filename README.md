@@ -9,7 +9,7 @@ Create your own Surface tracking web app using these simple steps using AFRAME.
 | surface-tracking  | portal-webar | marker-tracking |
 | ------------- | ------------- | ------------- |
 | [Live Demo][surface-tracking-demo-url]  | [Live Demo][portal-webar-demo-url]  | [Live Demo][marker-tracking-demo-url]  |
-|   |   | [Test Marker Images][marker-tracking-scan-images]  |
+|   |   | [Scan these Marker Images one at a time][marker-tracking-scan-images]  |
 |![Demo][surface-tracking-demo-gif]  | ![Demo][portal-webar-demo-gif]  | ![Demo][marker-tracking-demo-gif]  |
 |![QR Code][surface-tracking-qrcode]  | ![QR Code][portal-webar-qrcode]  | ![QR Code][marker-tracking-qrcode]  |
 
