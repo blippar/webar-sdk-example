@@ -24,4 +24,4 @@ Supports Android Chrome and iOS Safari.
 [marker-tracking-demo-gif]: https://github.com/blippar/webar-sdk-example/raw/main/assets/marker_tracking_demo.gif "marker-tracking"
 [marker-tracking-qrcode]: https://github.com/blippar/webar-sdk-example/raw/main/assets/marker-tracking-qrcode.png "QR Code"
 
-[marker-tracking-scan-images]: https://github.com/blippar/webar-sdk-example/raw/main/marker-tracking/markers/README.md
+[marker-tracking-scan-images]: https://github.com/blippar/webar-sdk-example/raw/main/marker-tracking/markers/
