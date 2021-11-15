@@ -13,10 +13,6 @@ Create your own Surface tracking web app using these simple steps using AFRAME.
 |![Demo][surface-tracking-demo-gif]  | ![Demo][portal-webar-demo-gif]  | ![Demo][marker-tracking-demo-gif]  |
 |![QR Code][surface-tracking-qrcode]  | ![QR Code][portal-webar-qrcode]  | ![QR Code][marker-tracking-qrcode]  |
 
-``` html
-  <script src="webar-sdk/blippar-webar.4bb53151.js"></script>
-```
-
 [surface-tracking-demo-url]: https://webar-sdk.blippar.com/webar-sdk-example/v1.0.9-beta/surface-tracking/index.html "Live Demo"
 [surface-tracking-demo-gif]: https://github.com/blippar/webar-sdk-example/raw/main/assets/surface_tracking_demo.gif "surface-tracking"
 [surface-tracking-qrcode]: https://github.com/blippar/webar-sdk-example/raw/main/assets/surface-tracking-qrcode.png "QR Code"
