@@ -25,7 +25,7 @@ Supports Android Chrome and iOS Safari.
 [marker-tracking-demo-gif]: https://github.com/blippar/webar-sdk-example/raw/main/assets/marker_tracking_demo.gif "marker-tracking"
 [marker-tracking-qrcode]: https://github.com/blippar/webar-sdk-example/raw/main/assets/aframe-marker-tracking-qrcode.png "QR Code"
 
-[marker-tracking-scan-images]: https://github.com/blippar/webar-sdk-example/raw/main/marker-tracking/markers/
+[marker-tracking-scan-images]: https://github.com/blippar/webar-sdk-example/raw/main/aframe/marker-tracking/markers/
 
 ## Playcanvas
 
@@ -34,7 +34,7 @@ Supports Android Chrome and iOS Safari.
 | [Live Demo][pc-surface-tracking-demo-url] | [Live Demo][pc-marker-tracking-demo-url]  |
 | [Fork Project][pc-surface-tracking-project-url] | [Fork Project][pc-marker-tracking-project-url]  |
 | [Read more][pc-read-more]| [Read more][pc-read-more]|
-|   | [Scan these Marker Images one at a time][marker-tracking-scan-images]  |
+|   | [Scan these Marker Images one at a time][pc-marker-tracking-scan-images]  |
 |![Demo][pc-surface-tracking-demo-img]  | ![Demo][pc-marker-tracking-demo-img]  |
 |![QR Code][pc-surface-tracking-qrcode]  | ![QR Code][pc-marker-tracking-qrcode]  |
 
@@ -48,4 +48,6 @@ Supports Android Chrome and iOS Safari.
 [pc-marker-tracking-demo-img]: https://github.com/blippar/webar-sdk-example/raw/main/assets/playcanvas-marker-tracking.jpg "Marker Tracking"
 [pc-marker-tracking-qrcode]: https://github.com/blippar/webar-sdk-example/raw/main/assets/playcanvas-marker-tracking-qrcode.png "QR Code"
 
-[pc-read-more]: https://github.com/blippar/webar-sdk-example/raw/main/playcanvas/README.md "Read more"
+[pc-marker-tracking-scan-images]: https://github.com/blippar/webar-sdk-example/raw/main/aframe/marker-tracking/markers/
+
+[pc-read-more]: https://github.com/blippar/webar-sdk-example/blob/main/playcanvas/README.md "Read more"
