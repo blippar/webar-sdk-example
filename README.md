@@ -33,7 +33,7 @@ Supports Android Chrome and iOS Safari.
 | ------------- | ------------- |
 | [Live Demo][pc-surface-tracking-demo-url] | [Live Demo][pc-marker-tracking-demo-url]  |
 | [Fork Project][pc-surface-tracking-project-url] | [Fork Project][pc-marker-tracking-project-url]  |
-| [Read more][pc-read-more]| [Read more][pc-read-more]|
+| [Read more][pc-surface-tracking-read-more]| [Read more][pc-marker-tracking-read-more]|
 |   | [Scan these Marker Images one at a time][pc-marker-tracking-scan-images]  |
 |![Demo][pc-surface-tracking-demo-img]  | ![Demo][pc-marker-tracking-demo-img]  |
 |![QR Code][pc-surface-tracking-qrcode]  | ![QR Code][pc-marker-tracking-qrcode]  |
@@ -42,12 +42,12 @@ Supports Android Chrome and iOS Safari.
 [pc-surface-tracking-project-url]: https://playcanvas.com/project/859355/overview/surface-tracking "Project Url"
 [pc-surface-tracking-demo-img]: https://github.com/blippar/webar-sdk-example/raw/main/assets/playcanvas-surface-tracking.jpg "Surface Tracking"
 [pc-surface-tracking-qrcode]: https://github.com/blippar/webar-sdk-example/raw/main/assets/playcanvas-surface-tracking-qrcode.png "QR Code"
+[pc-surface-tracking-read-more]: https://github.com/blippar/webar-sdk-example/blob/main/playcanvas/README.md#surface-tracking "Read more"
 
 [pc-marker-tracking-demo-url]: https://webar-sdk.blippar.com/webar-sdk-example/v1.1.0-beta/playcanvas/Marker%20Tracking/index.html "Live Demo"
 [pc-marker-tracking-project-url]: https://playcanvas.com/project/859368/overview/marker-tracking "Project Url"
 [pc-marker-tracking-demo-img]: https://github.com/blippar/webar-sdk-example/raw/main/assets/playcanvas-marker-tracking.jpg "Marker Tracking"
 [pc-marker-tracking-qrcode]: https://github.com/blippar/webar-sdk-example/raw/main/assets/playcanvas-marker-tracking-qrcode.png "QR Code"
+[pc-marker-tracking-read-more]: https://github.com/blippar/webar-sdk-example/blob/main/playcanvas/README.md#marker-tracking "Read more"
 
 [pc-marker-tracking-scan-images]: https://github.com/blippar/webar-sdk-example/raw/main/aframe/marker-tracking/markers/
-
-[pc-read-more]: https://github.com/blippar/webar-sdk-example/blob/main/playcanvas/README.md "Read more"

@@ -13,8 +13,6 @@
 
 ## Marker Tracking
 
-[Live Demo](https://webar-sdk.blippar.com/webar-sdk-example/v1.1.0-beta/playcanvas/Marker%20Tracking/index.html)
-
 - Fork this Playcanvas [Marker Tracking](https://playcanvas.com/project/859368/overview/marker-tracking) project
 - Click **EDITOR** to open the project
 - Select the 'Main' Scene
