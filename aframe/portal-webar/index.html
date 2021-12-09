@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="#" />
+    <title>Blippar WebAR SDK</title>
+
+    <!-- From WebAR SDK v1.1.0-beta AFrame script has to be included and before webar-sdk script -->
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+
+    <!-- Step 1: Include WebAR SDK script -->
+    <script src="../../blippar/webar-sdk-v1.1.0-beta.min.js"
+      auto-start="true"
+      logo-src="../../images/test_logo_here.png"
+      logo-width="116px"
+      logo-height="116px"
+      progress-dot-ring-scale="0.30"
+      progress-dot-ring-color="#00AAFF"
+      progress-ring-scale="0.36"
+      progress-ring-color="#00FFFF"
+      progress-ring-line-width="5"
+
+      alert-border-color="#00FFFF"
+      alert-border-width="5px"
+      alert-background-color="#283747"
+      alert-message-text-color="#00AAFF"
+      alert-button-color="#00FFFF"
+      alert-button-text-color="#283747"
+      alert-button-height="50px"
+      alert-camera-permission-text="We need to ask for access to the camera so this experience can work!!!"
+      alert-camera-permission-button-text="No Problem"
+      alert-motion-permission-text="Now we need access to motion sensors!!!"
+      alert-motion-permission-button-text="No Problem"
+
+      ui-background-color="#283747"
+      ui-text-color="#00FFFF"
+      desktop-logo-src="../../images/test_desktop_logo.png"
+      desktop-logo-width="108px"
+      desktop-logo-height="30px"
+      issue-img-src="../../images/test_issue_img.png"
+      issue-img-width="116px"
+      issue-img-height="116px"
+      show-guide-view="true"
+    ></script>
+
+    <script src="https://unpkg.com/aframe-animation-timeline-component@2.0.0/dist/aframe-animation-timeline-component.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Refer API:Functions documentation for more details -->
+    <script>
+      var portalObject = undefined;
+      var portalHiderObject = undefined;
+
+      AFRAME.registerComponent("landingcursor", {
+        init: function() {
+          WEBARSDK.SetStageReadyCallback(() => {
+            console.log('Stage is ready now!!!');
+            portalHiderObject = document.getElementById('portal_1');
+            portalObject = document.getElementById('portal_2');
+
+            // First, show the surface landing animation
+            this.el.emit('landit');
+          });
+
+          this.el.addEventListener("animationcomplete__cursorend", e => {
+            // Second, show the 3D object
+            portalHiderObject.setAttribute('visible', true);
+            portalObject.setAttribute('visible', true);
+
+            // Hide surface landing cursor
+            this.el.setAttribute('visible', false);
+          });
+        }
+      });
+
+      let closenessRatio = 0.25;
+
+      WEBARSDK.SetPortalEntryCallback(() => {
+          console.info('Entered the portal door');
+
+          let enableGyroCam = true;
+          WEBARSDK.DisableTracking(enableGyroCam);
+
+          // Position to the center of 360 view
+          // Its a one way portal. No going back to the real world.
+          portalObject.object3D.position.set(0, 0, 3.0);
+          portalHiderObject.object3D.position.set(0, 0, 3.0);
+
+          console.info('Enabled gyro cam');
+        },
+      closenessRatio);
+
+      AFRAME.registerComponent("hider-material", {
+        init: function () {
+          this.el.addEventListener('model-loaded', this.update.bind(this));
+        },
+        update: function () {
+          this.el.object3D.traverse(function (child) {
+            if (child.isMesh) {
+              child.material.colorWrite = false;
+            }
+          });
+        }
+      });
+
+    </script>
+
+    <!-- Step 2: Add webar-scene attribute to AFrame's <a-scene> tag -->
+      <!-- Provide a valid Blippar license-key value in the key: property  -->
+    <a-scene
+      webar-scene="key: xxxxxxxx-1111-2222-3333-yyyyyyyyyyyy"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+      loading-screen="enabled: false"
+      renderer="colorManagement: true;"
+      animation-timeline__1="timeline: #landingTimeline; loop: false; startEvents: landit;">
+
+      <!-- Step 3: Add webar-camera attribute to AFrame's <a-entity camera> tag -->
+      <a-camera webar-camera></a-camera>
+
+      <a-assets timeout="60000">
+        <a-timeline id="landingTimeline">
+          <a-timeline-animation select="#landing" name="cursorbegin"></a-timeline-animation>
+          <a-timeline-animation select="#landing" name="cursorend"></a-timeline-animation>
+        </a-timeline>
+
+        <a-mixin id="landeffect"
+          animation__cursorbegin="property: visible; from: false; to: true; dur: 1; autoplay: false"
+          animation__cursorend="property: scale; to: 0.75 0.75 0.75; dur: 2000; easing: easeInOutElastic; autoplay: false"
+          scale="0.0001 0.0001 0.0001"
+          position="0 0 0"
+          visible="false"></a-mixin>
+
+        <a-asset-item id="portalhider" src="models/portalhider.glb"></a-asset-item>
+        <a-asset-item id="portal" src="models/portal.glb"></a-asset-item>
+      </a-assets>
+
+      <!-- Step 4: Add webar-stage attribute to an AFrame's parent <a-entity> tag -->
+      <a-entity webar-stage>
+        <a-ring landingcursor id="landing" mixin="landeffect" color="#FBB42C" material="opacity: 0.4; transparent: true" radius-inner="0.8" radius-outer="1"  rotation="-90 0 0" segments-phi=30 segments-theta=96></a-ring>
+
+        <!-- Step 5: Add AR models under the webar-stage node -->
+          <!-- Add webar-loadmonitor attribute to the entities to display loading progress screen before starting the surface tracking -->
+          <!-- Refer API:Attributes documentation for more details -->
+        <a-entity gltf-model="#portalhider" id="portal_1" rotation="0 0 0" position="0 0 0" scale="3.0 3.0 3.0" webar-loadmonitor="elType: glb" visible=false hider-material></a-entity>
+        <a-entity gltf-model="#portal" id="portal_2" rotation="0 0 0" position="0 0 0" scale="3.0 3.0 3.0" webar-loadmonitor="elType: glb" visible=false></a-entity>
+      </a-entity>
+
+    </a-scene>
+
+  </body>
+</html>
