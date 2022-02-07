@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="shortcut icon" href="#" />
+        <title>Babylon.js WebAR SDK</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,shrink-to-fit=no,user-scalable=no,minimal-ui,viewport-fit=cover">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="theme-color" content="black">
+
+        <!-- Babylon.js -->
+        <script src="https://cdn.babylonjs.com/babylon.js"></script>
+        <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+
+        <!-- WebAR SDK -->
+
+        <script src="../../blippar/webar-sdk-v1.2.0-beta.min.js?license-key=xxxxxxxx-1111-2222-3333-yyyyyyyyyyyy"
+          webar-mode="marker-tracking"
+          auto-start="true"
+          rendering-engine="babylonjs"
+          logo-src="../../images/test_logo_here.png"
+          logo-width="116px"
+          logo-height="116px"
+          progress-dot-ring-scale="0.30"
+          progress-dot-ring-color="#00AAFF"
+          progress-ring-scale="0.36"
+          progress-ring-color="#00FFFF"
+          progress-ring-line-width="5"
+
+          alert-border-color="#00FFFF"
+          alert-border-width="5px"
+          alert-background-color="#283747"
+          alert-message-text-color="#00AAFF"
+          alert-button-color="#00FFFF"
+          alert-button-text-color="#283747"
+          alert-button-height="50px"
+          alert-camera-permission-text="We need to ask for access to the camera so this experience can work!!!"
+          alert-camera-permission-button-text="No Problem"
+          alert-motion-permission-text="Now we need access to motion sensors!!!"
+          alert-motion-permission-button-text="No Problem"
+
+          ui-background-color="#283747"
+          ui-text-color="#00FFFF"
+          desktop-logo-src="../../images/test_desktop_logo.png"
+          desktop-logo-width="108px"
+          desktop-logo-height="30px"
+          issue-img-src="../../images/test_issue_img.png"
+          issue-img-width="116px"
+          issue-img-height="116px"
+          show-guide-view="true"></script>
+
+        <style>
+            #renderCanvas {
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
+              touch-action: none;
+            }
+        </style>
+    </head>
+<body>
+    <canvas id="renderCanvas"></canvas>
+    <script>
+        var canvas = document.getElementById("renderCanvas");
+
+        var engine = null;
+        var sceneToRender = null;
+        var webarStage = null;
+        var webarMarkerMeshMap = [];
+
+        var scaleByFactor = function(obj, factor) {
+            obj.scaling.x = obj.scaling.x * factor;
+            obj.scaling.y = obj.scaling.y * factor;
+            obj.scaling.z = obj.scaling.z * factor;
+        }
+
+        var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
+        var createScene = function () {
+            var scene = new BABYLON.Scene(engine);
+            scene.environmentTexture = BABYLON.CubeTexture.CreateFromPrefilteredData("./models/environment.dds", scene);
+
+            var camera = new BABYLON.UniversalCamera("camera1", new BABYLON.Vector3(0, 0, 0), scene);
+
+            var light = new BABYLON.HemisphericLight("HemiLight", new BABYLON.Vector3(5, 10, -2), scene);
+            light.intensity = 0.7;
+
+            // Create two empty meshes. Models/meshes appended as a children to this empty mesh will be displayed on the corresponding mapped marker.
+            let webarMarkerMesh1 = new BABYLON.Mesh("webarMarkerMesh1", scene);
+            let webarMarkerMesh2 = new BABYLON.Mesh("webarMarkerMesh2", scene);
+
+            webarMarkerMeshMap.push({ markerId: "dddddddd-uuuu-mmmm-mmmm-yyyyyyy11111", markerMesh: webarMarkerMesh1 });
+            webarMarkerMeshMap.push({ markerId: "dddddddd-uuuu-mmmm-mmmm-yyyyyyy22222", markerMesh: webarMarkerMesh2 });
+
+            // Append a gltf model to the scene and scale appropriately. No need to set the parent to webarStage mesh.
+            // All gltf models appended to the scene are created under __root__ node by babylon.
+            // After the complete scene is ready, it is models under __root_ node are moved to webarStage mesh,
+            // by attachModelsToSurface function, to appear on the surface
+            BABYLON.SceneLoader.ImportMesh(null, "./models/", "MaterialsVariantsShoe.glb", scene, function (meshes, particleSystems, skeletons) {
+                let xQuat = new BABYLON.Quaternion();
+                for (mesh of meshes) {
+                    if (mesh.name !== '__root__') {
+                        // Move the loaded models to webarStage
+                        mesh.setParent(webarMarkerMesh1);
+
+                        BABYLON.Quaternion.FromEulerAnglesToRef(Math.PI / 2, 0, 0, xQuat);
+                        mesh.rotationQuaternion.multiplyInPlace(xQuat);
+
+                        scaleByFactor(mesh, 6);
+                    }
+                }
+            });
+
+            BABYLON.SceneLoader.ImportMesh(['Object_4', 'Object_6'], "./models/", "milk_bottle_1l.glb", scene, function (meshes, particleSystems, skeletons) {
+                for (mesh of meshes) {
+                    if (mesh.name !== '__root__') {
+                        // Move the loaded models to webarStage
+                        mesh.setParent(webarMarkerMesh2);
+                        mesh.position.y = -0.75;
+
+                        scaleByFactor(mesh, 5);
+                    }
+                }
+            });
+
+            // Pass babylon canvas, scene, camera and webarMarkerMeshMap array to WebarSdk to initialize marker tracking
+            WEBARSDK.InitBabylonJs(canvas, scene, camera, webarMarkerMeshMap);
+
+            return scene;
+        };
+
+        window.initFunction = async function() {
+            var asyncEngineCreation = async function() {
+                try {
+                    return createDefaultEngine();
+                } catch(e) {
+                console.log("the available createEngine function failed. Creating the default engine instead");
+                    return createDefaultEngine();
+                }
+            }
+
+            window.engine = await asyncEngineCreation();
+            if (!engine) throw 'engine should not be null.';
+            window.scene = createScene();
+        };
+
+        initFunction().then(() => {
+            sceneToRender = window.scene;
+            sceneToRender.executeWhenReady(function () {
+                engine.runRenderLoop(function () {
+                    if (sceneToRender && sceneToRender.activeCamera) {
+                        sceneToRender.render();
+                    }
+                });
+            });
+        });
+
+        window.addEventListener("resize", function () {
+            engine.resize();
+        });
+    </script>
+</body>
+</html>
