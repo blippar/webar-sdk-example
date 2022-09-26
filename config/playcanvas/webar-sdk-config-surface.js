@@ -1,8 +1,9 @@
 window.WEBAR_SDK_CONFIG = {
   "webar-mode": "surface-tracking",
   "rendering-engine":"playcanvas",
+  "auto-init":"true",
   "auto-start":"true",
-  "logo-src":"../images/test_logo_here.png",
+  "logo-src":"../../images/test_logo_here.png",
   "logo-width":"116px",
   "logo-height":"116px",
   "progress-dot-ring-scale":"0.30",
@@ -25,11 +26,13 @@ window.WEBAR_SDK_CONFIG = {
 
   "ui-background-color":"#283747",
   "ui-text-color":"#00FFFF",
-  "desktop-logo-src":"../images/test_desktop_logo.png",
+  "ui-portrait-text":"This experience is optimised for portrait display only",
+  "desktop-logo-src":"../../images/test_desktop_logo.png",
   "desktop-logo-width":"108px",
   "desktop-logo-height":"30px",
-  "issue-img-src":"../images/test_issue_img.png",
+  "issue-img-src":"../../images/test_issue_img.png",
   "issue-img-width":"116px",
   "issue-img-height":"116px",
-  "show-guide-view":"true"
+  "show-guide-view":"true",
+  "show-guide-animation-url":"https://webar-sdk.blippar.com/static/Surface_Scan.json"
 };

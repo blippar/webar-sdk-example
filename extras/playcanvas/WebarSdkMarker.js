@@ -36,5 +36,5 @@ WebarSdkMarker.attributes.add('MarkerEntityMap', {
 // initialize Webar SDK with playcanvas entity details
 WebarSdkMarker.prototype.initialize = function() {
     console.log('this.WebarCamera = ' + this.WebarCamera);
-    WEBARSDK.InitPlaycanvas('application-canvas', this.WebarCamera, this.MarkerEntityMap);
+    WEBARSDK.InitPlayCanvas('application-canvas', this.WebarCamera, this.MarkerEntityMap);
 };

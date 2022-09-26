@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8"/>
     <link rel="shortcut icon" href="#" />
     <title>Blippar WebAR SDK</title>
 
-    <!-- From WebAR SDK v1.1.0-beta AFrame script has to be included and before webar-sdk script -->
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
 
     <!-- Step 1: Include WebAR SDK script -->
-    <script src="../../blippar/webar-sdk-v1.2.0-beta.min.js"
+    <!-- PS: User may overload the splash screen by passing function string to on-load parameter
+         e.g. on-load = "LoadMySplash()" -->
+    <script src="../../blippar/webar-sdk-v1.4.3.min.js"
+      on-load=""
+      auto-init="false"
       auto-start="true"
       logo-src="../../images/test_logo_here.png"
       logo-width="116px"
@@ -33,6 +37,7 @@
 
       ui-background-color="#283747"
       ui-text-color="#00FFFF"
+      ui-portrait-text="This experience is optimised for portrait display only"
       desktop-logo-src="../../images/test_desktop_logo.png"
       desktop-logo-width="108px"
       desktop-logo-height="30px"
@@ -40,14 +45,16 @@
       issue-img-width="116px"
       issue-img-height="116px"
       show-guide-view="true"
-    ></script>
+      show-guide-animation-url=""></script>
 
-    <script src="https://unpkg.com/aframe-animation-timeline-component@2.0.0/dist/aframe-animation-timeline-component.min.js"></script>
+      <script src="https://unpkg.com/aframe-animation-timeline-component@2.0.0/dist/aframe-animation-timeline-component.min.js"></script>
   </head>
 
   <body>
-    <!-- Refer API:Functions documentation for more details -->
-    <script>
+
+     <!-- Refer API:Functions documentation for more details -->
+     <script>
+      WEBARSDK.Init();
       var portalObject = undefined;
       var portalHiderObject = undefined;
 
@@ -105,48 +112,49 @@
 
     </script>
 
-    <!-- Step 2: Add webar-scene attribute to AFrame's <a-scene> tag -->
+      <!-- Step 2: Add webar-scene attribute to AFrame's <a-scene> tag -->
       <!-- Provide a valid Blippar license-key value in the key: property  -->
-    <a-scene
-      webar-scene="key: xxxxxxxx-1111-2222-3333-yyyyyyyyyyyy"
-      vr-mode-ui="enabled: false"
-      device-orientation-permission-ui="enabled: false"
-      loading-screen="enabled: false"
-      renderer="colorManagement: true;"
-      animation-timeline__1="timeline: #landingTimeline; loop: false; startEvents: landit;">
+      <a-scene
+        webar-scene="key: xxxxxxxx-1111-2222-3333-yyyyyyyyyyyy"
+        vr-mode-ui="enabled: false"
+        device-orientation-permission-ui="enabled: false"
+        loading-screen="enabled: false"
+        renderer="colorManagement: true;"
+        animation-timeline__1="timeline: #landingTimeline; loop: false; startEvents: landit;">
 
-      <!-- Step 3: Add webar-camera attribute to AFrame's <a-entity camera> tag -->
-      <a-camera webar-camera></a-camera>
+        <!-- Step 3: Add webar-camera attribute to AFrame's <a-entity camera> tag -->
+        <a-camera webar-camera></a-camera>
 
-      <a-assets timeout="60000">
-        <a-timeline id="landingTimeline">
-          <a-timeline-animation select="#landing" name="cursorbegin"></a-timeline-animation>
-          <a-timeline-animation select="#landing" name="cursorend"></a-timeline-animation>
-        </a-timeline>
+        <a-assets timeout="60000">
+          <a-timeline id="landingTimeline">
+            <a-timeline-animation select="#landing" name="cursorbegin"></a-timeline-animation>
+            <a-timeline-animation select="#landing" name="cursorend"></a-timeline-animation>
+          </a-timeline>
 
-        <a-mixin id="landeffect"
-          animation__cursorbegin="property: visible; from: false; to: true; dur: 1; autoplay: false"
-          animation__cursorend="property: scale; to: 0.75 0.75 0.75; dur: 2000; easing: easeInOutElastic; autoplay: false"
-          scale="0.0001 0.0001 0.0001"
-          position="0 0 0"
-          visible="false"></a-mixin>
+          <a-mixin id="landeffect"
+            animation__cursorbegin="property: visible; from: false; to: true; dur: 1; autoplay: false"
+            animation__cursorend="property: scale; to: 0.75 0.75 0.75; dur: 2000; easing: easeInOutElastic; autoplay: false"
+            scale="0.0001 0.0001 0.0001"
+            position="0 0 0"
+            visible="false"></a-mixin>
 
-        <a-asset-item id="portalhider" src="models/portalhider.glb"></a-asset-item>
-        <a-asset-item id="portal" src="models/portal.glb"></a-asset-item>
-      </a-assets>
+          <a-asset-item id="portalhider" src="models/portalhider.glb"></a-asset-item>
+          <a-asset-item id="portal" src="models/portal.glb"></a-asset-item>
+        </a-assets>
 
-      <!-- Step 4: Add webar-stage attribute to an AFrame's parent <a-entity> tag -->
-      <a-entity webar-stage>
-        <a-ring landingcursor id="landing" mixin="landeffect" color="#FBB42C" material="opacity: 0.4; transparent: true" radius-inner="0.8" radius-outer="1"  rotation="-90 0 0" segments-phi=30 segments-theta=96></a-ring>
+        <!-- Step 4: Add webar-stage attribute to an AFrame's parent <a-entity> tag -->
+        <a-entity webar-stage>
+          <a-ring landingcursor id="landing" mixin="landeffect" color="#FBB42C" material="opacity: 0.4; transparent: true" radius-inner="0.8" radius-outer="1"  rotation="-90 0 0" segments-phi=30 segments-theta=96></a-ring>
 
-        <!-- Step 5: Add AR models under the webar-stage node -->
-          <!-- Add webar-loadmonitor attribute to the entities to display loading progress screen before starting the surface tracking -->
-          <!-- Refer API:Attributes documentation for more details -->
-        <a-entity gltf-model="#portalhider" id="portal_1" rotation="0 0 0" position="0 0 0" scale="3.0 3.0 3.0" webar-loadmonitor="elType: glb" visible=false hider-material></a-entity>
-        <a-entity gltf-model="#portal" id="portal_2" rotation="0 0 0" position="0 0 0" scale="3.0 3.0 3.0" webar-loadmonitor="elType: glb" visible=false></a-entity>
-      </a-entity>
+          <!-- Step 5: Add AR models under the webar-stage node -->
+            <!-- Add webar-loadmonitor attribute to the entities to display loading progress screen before starting the surface tracking -->
+            <!-- Refer API:Attributes documentation for more details -->
+          <a-entity gltf-model="#portalhider" id="portal_1" rotation="0 0 0" position="0 0 0" scale="3.0 3.0 3.0" webar-loadmonitor="elType: glb" visible=false hider-material></a-entity>
+          <a-entity gltf-model="#portal" id="portal_2" rotation="0 0 0" position="0 0 0" scale="3.0 3.0 3.0" webar-loadmonitor="elType: glb" visible=false></a-entity>
+        </a-entity>
 
-    </a-scene>
+      </a-scene>
 
+   
   </body>
 </html>

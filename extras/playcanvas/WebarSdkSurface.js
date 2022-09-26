@@ -13,5 +13,5 @@ WebarSdkSurface.attributes.add('webarSdkStage', {
 
 // initialize Webar SDK with playcanvas entity details
 WebarSdkSurface.prototype.initialize = function() {
-    WEBARSDK.InitPlaycanvas('application-canvas', this.webarSdkCamera, this.webarSdkStage);
+    WEBARSDK.InitPlayCanvas('application-canvas', this.webarSdkCamera, this.webarSdkStage);
 };

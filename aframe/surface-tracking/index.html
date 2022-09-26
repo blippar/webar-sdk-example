@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8"/>
     <link rel="shortcut icon" href="#" />
     <title>Blippar WebAR SDK</title>
 
-    <!-- From WebAR SDK v1.1.0-beta AFrame script has to be included and before webar-sdk script -->
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
 
     <!-- Step 1: Include WebAR SDK script -->
-    <script src="../../blippar/webar-sdk-v1.2.0-beta.min.js"
-      auto-start="false"
+    <!-- PS: User may overload the splash screen by passing function string to on-load parameter
+         e.g. on-load = "LoadMySplash()" -->
+    <script src="../../blippar/webar-sdk-v1.4.3.min.js"
+      on-load=""
+      webar-mode="surface-tracking"
+      auto-init="false"
+      auto-start="true"
       logo-src="../../images/test_logo_here.png"
       logo-width="116px"
       logo-height="116px"
@@ -33,6 +38,7 @@
 
       ui-background-color="#283747"
       ui-text-color="#00FFFF"
+      ui-portrait-text="This experience is optimised for portrait display only"
       desktop-logo-src="../../images/test_desktop_logo.png"
       desktop-logo-width="108px"
       desktop-logo-height="30px"
@@ -40,19 +46,22 @@
       issue-img-width="116px"
       issue-img-height="116px"
       show-guide-view="true"
-    ></script>
+      show-guide-animation-url=""></script>
 
-    <script src="https://unpkg.com/aframe-animation-timeline-component@2.0.0/dist/aframe-animation-timeline-component.min.js"></script>
+      <script src="https://unpkg.com/aframe-animation-timeline-component@2.0.0/dist/aframe-animation-timeline-component.min.js"></script>
   </head>
 
   <body>
-    <!-- Refer API:Functions documentation for more details -->
-    <script>
-      // Start() API has to be called, if auto-start="false" attribute is set in the SDK script tag
-      WEBARSDK.Start();
 
+     <!-- Refer API:Functions documentation for more details -->
+     <script>
+      WEBARSDK.Init();
+
+      // Sets the webar mode if not defined earlier or enable lazy mode in webar-mode parameter
+      // WEBARSDK.SetWebARMode("surface-tracking");
       AFRAME.registerComponent("landingcursor", {
         init: function() {
+          // Give a callback when the WebAR Stage <a-entity webar-stage> is ready  to display the 3d object
           WEBARSDK.SetStageReadyCallback(() => {
             console.log('Stage is ready now!!!');
             this.el.emit('landit');
@@ -74,7 +83,7 @@
           console.log(" Stop(ped) hand guide animation");
         }
       );
-  </script>
+    </script>
 
     <!-- Step 2: Add webar-scene attribute to AFrame's <a-scene> tag -->
       <!-- Provide a valid Blippar license-key value in the key: property  -->
@@ -117,5 +126,6 @@
 
     </a-scene>
 
+   
   </body>
 </html>
