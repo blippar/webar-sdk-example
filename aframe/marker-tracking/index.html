@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8"/>
     <link rel="shortcut icon" href="#" />
     <title>Blippar WebAR SDK</title>
 
+    <!-- From WebAR SDK v1.1.0-beta AFrame script has to be included and before webar-sdk script -->
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
 
     <!-- Step 1: Include WebAR SDK script -->
-    <!-- PS: User may overload the splash screen by passing function string to on-load parameter
-         e.g. on-load = "LoadMySplash()" -->
-    <script src="../blippar/webar-sdk-v1.4.3.min.js"
-      on-load=""
+    <script src="../../blippar/webar-sdk-v1.2.0-beta.min.js"
       webar-mode="marker-tracking"
-      auto-init="false"
-      auto-start="true"
+      auto-start="false"
       logo-src="../../images/test_logo_here.png"
       logo-width="116px"
       logo-height="116px"
@@ -38,42 +34,13 @@
 
       ui-background-color="#283747"
       ui-text-color="#00FFFF"
-      ui-portrait-text="This experience is optimised for portrait display only"
       desktop-logo-src="../../images/test_desktop_logo.png"
       desktop-logo-width="108px"
       desktop-logo-height="30px"
       issue-img-src="../../images/test_issue_img.png"
       issue-img-width="116px"
       issue-img-height="116px"
-      show-guide-view="true"
-
-      auto-marker-detection="true"
-      auto-scan-instruction="Look for a marker to scan..."
-      auto-scan-instruction-detect="Detecting..."
-      auto-scan-instruction-idle="Move around to look for a marker"
-      auto-scan-instruction-text-style="color: orange"
-      auto-scan-style="display: none; position: absolute; top: 90%; left: 50%; transform: translate(-50%, -50%); z-index: 10000; width: auto; height: auto; text-align: center;"
-      auto-scan-style-display="block"
-      scan-btn-width="100"
-      scan-btn-height="100"
-      scan-btn-display="block"
-      scan-btn-instruction="Tap to scan"
-      scan-btn-instruction-style="color: white"
-      scan-btn-img-src="../../images/user_scan-btn-image_here.png"
-      scan-btn-img-width="50"
-      scan-btn-img-height="50"
-      scan-btn-img-x-coordinate="50%"
-      scan-btn-img-y-coordinate="50%"
-      scan-btn-img-transform="translate(-25, -25)"
-      scan-btn-progress-circle-cx-coordinate="50"
-      scan-btn-progress-circle-cy-coordinate="50"
-      scan-btn-progress-circle-radius="35"
-      scan-btn-progress-circle-style="fill: none; stroke: cyan; stroke-width: 6;"
-      scan-btn-progress-bar-cx-coordinate="50"
-      scan-btn-progress-bar-cy-coordinate="50"
-      scan-btn-progress-bar-radius="35"
-      scan-btn-progress-bar-transform="rotate(-90 50 50)"
-      scan-btn-progress-bar-color="blue"></script>
+      show-guide-view="true"></script>
 
   </head>
 
@@ -96,9 +63,9 @@
         <a-asset-item id="testmodel2" src="models/milk_bottle_1l.glb"></a-asset-item>
       </a-assets>
 
-        <!-- Step 4: Add webar-marker attribute with a valid marker id value(obtained from Blippar hub), to AFrame's parent <a-entity> tag -->
+        <!-- Step 4: Add webar-marker attribute with a valid marker id value(obtained from Blippar Marker Manager), to AFrame's parent <a-entity> tag -->
           <!-- The models defined as a child element under this webar-marker id, will be displayed on the marker image during marker image tracking -->
-        <a-entity webar-marker="id: dddddddd-uuuu-mmmm-mmmm-yyyyyyyyyyyy">
+        <a-entity webar-marker="id: dddddddd-uuuu-mmmm-mmmm-yyyyyyy11111">
           <!-- Step 5: Add AR models under the webar-marker nodes -->
           <!-- Add webar-loadmonitor attribute to the entities to display loading progress screen before starting the surface tracking -->
           <!-- Refer API Reference documentation for more details -->
@@ -106,8 +73,8 @@
         </a-entity>
 
         <!-- Step 6: Add another webar-marker attribute with a valid marker id to another parent <a-entity> tag -->
-        <a-entity webar-marker="id: dddddddd-uuuu-mmmm-mmmm-yyyyyyyyyyyy">
-          <a-entity gltf-model="#testmodel2" id="testmodel_2" rotation="0 0 0" position="0 -0.5 0" scale="0.25 0.25 0.25" webar-loadmonitor="elType: glb"></a-entity>
+        <a-entity webar-marker="id: dddddddd-uuuu-mmmm-mmmm-yyyyyyy22222">
+          <a-entity gltf-model="#testmodel2" id="testmodel_2" rotation="0 0 0" position="0 -0.5 0" scale="5 5 5" webar-loadmonitor="elType: glb"></a-entity>
         </a-entity>
 
         <!-- Step 7: Add more <a-entity webar-marker="id: ..."> elements here, if required -->
@@ -116,27 +83,22 @@
 
     <!-- Refer API:Functions documentation for more details -->
     <script>
-      WEBARSDK.Init();
+      WEBARSDK.Start();
 
-      // Give a callback when the WebAR Marker <a-entity webar-marker> is ready  to track the marker image
-        WEBARSDK.SetMarkerDetectedCallback((markerId) => {
-          console.info('Marker is detected for marker id: ', markerId);
+      // Give a callback when the WebAR Stage <a-entity webar-stage> is ready  to display the 3d object
+      WEBARSDK.SetStageReadyCallback(() => {
+        console.info('Stage is ready now!!!');
       });
 
-      // Give a callback when the WebAR Marker <a-entity webar-marker> is lost
-      WEBARSDK.SetMarkerLostCallback((markerId) => {
-        console.info('Marker tracking is lost for marker id: ', markerId);
-      });
+      WEBARSDK.SetGuideViewCallbacks(
+        startGuideViewCallback = () => {
+          console.log(" Start(ed) hand guide animation");
+        },
 
-      /**
-       * Sets custom style for auto marker detection(auto-marker-detection = true):
-       *  (1) Add your custom html layout for auto marker detection
-       *  (2) May disable scan instruction if needed, by default it is true
-       * @param {HTMLElement} custom division
-       * @param {boolean} showScanInstructions set it to false to disable it
-       */
-      //WEBARSDK.SetAutoMarkerDetectionStyle(htmlElement, showScanInstructions)
-      
+        stopGuideViewCallback = () => {
+          console.log(" Stop(ped) hand guide animation");
+        }
+      );
     </script>
   </body>
 </html>
