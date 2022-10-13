@@ -10,11 +10,12 @@
     <!-- Step 1: Include WebAR SDK script -->
     <!-- PS: User may overload the splash screen by passing function string to on-load parameter
          e.g. on-load = "LoadMySplash()" -->
-    <script src="../../blippar/webar-sdk-v1.4.3.min.js"
+    <script src="../../webar-sdk-v1.4.3.min.js"
       on-load=""
       webar-mode="marker-tracking"
       auto-init="false"
       auto-start="true"
+      static-camera="true"
       logo-src="../../images/test_logo_here.png"
       logo-width="116px"
       logo-height="116px"
@@ -35,6 +36,9 @@
       alert-camera-permission-button-text="No Problem"
       alert-motion-permission-text="Now we need access to motion sensors!!!"
       alert-motion-permission-button-text="No Problem"
+      alert-box-width="290px"
+      alert-box-height="182px"
+      alert-box-font-size="24px"
 
       ui-background-color="#283747"
       ui-text-color="#00FFFF"

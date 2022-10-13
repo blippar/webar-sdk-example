@@ -16,11 +16,12 @@
         <!-- PS: User may overload the splash screen by passing function string to on-load parameter
          e.g. on-load = "LoadMySplash()" -->
 
-        <script src="../../blippar/webar-sdk-v1.4.3.min.js?license-key=xxxxxxxx-1111-2222-3333-yyyyyyyyyyyy"
+        <script src="../../webar-sdk-v1.4.3.min.js?license-key=xxxxxxxx-1111-2222-3333-yyyyyyyyyyyy"
           on-load=""
           webar-mode="marker-tracking"
           auto-init="true"
           auto-start="true"
+          static-camera="true"
           rendering-engine="babylonjs"
           logo-src="../../images/test_logo_here.png"
           logo-width="116px"
@@ -42,6 +43,9 @@
           alert-camera-permission-button-text="No Problem"
           alert-motion-permission-text="Now we need access to motion sensors!!!"
           alert-motion-permission-button-text="No Problem"
+          alert-box-width="290px"
+          alert-box-height="182px"
+          alert-box-font-size="24px"
 
           ui-background-color="#283747"
           ui-text-color="#00FFFF"
@@ -123,8 +127,8 @@
             let webarMarkerMesh1 = new BABYLON.Mesh("webarMarkerMesh1", scene);
             let webarMarkerMesh2 = new BABYLON.Mesh("webarMarkerMesh2", scene);
 
-            webarMarkerMeshMap.push({ markerId: "dddddddd-uuuu-mmmm-mmmm-yyyyyyy11111", markerMesh: webarMarkerMesh1 });
-            webarMarkerMeshMap.push({ markerId: "dddddddd-uuuu-mmmm-mmmm-yyyyyyy22222", markerMesh: webarMarkerMesh2 });
+            webarMarkerMeshMap.push({ markerId: "ca4f2f8c-08f5-4cc5-b240-9d661a3823a9", markerMesh: webarMarkerMesh1 });
+            webarMarkerMeshMap.push({ markerId: "e3647353-09fc-4ef4-b8a6-7bf1126c83ac", markerMesh: webarMarkerMesh2 });
 
             // Append a gltf model to the scene and scale appropriately. No need to set the parent to webarStage mesh.
             // All gltf models appended to the scene are created under __root__ node by babylon.

@@ -16,11 +16,12 @@
         <!-- PS: User may overload the splash screen by passing function string to on-load parameter
          e.g. on-load = "LoadMySplash()" -->
 
-        <script src="../../blippar/webar-sdk-v1.4.3.min.js?license-key=xxxxxxxx-1111-2222-3333-yyyyyyyyyyyy"
+        <script src="../../webar-sdk-v1.4.3.min.js?license-key=xxxxxxxx-1111-2222-3333-yyyyyyyyyyyy"
           on-load=""
           webar-mode="surface-tracking"
           auto-init="true"
           auto-start="true"
+          static-camera="true"
           rendering-engine="babylonjs"
           logo-src="../../images/test_logo_here.png"
           logo-width="116px"
@@ -42,6 +43,9 @@
           alert-camera-permission-button-text="No Problem"
           alert-motion-permission-text="Now we need access to motion sensors!!!"
           alert-motion-permission-button-text="No Problem"
+          alert-box-width="290px"
+          alert-box-height="182px"
+          alert-box-font-size="24px"
 
           ui-background-color="#283747"
           ui-text-color="#00FFFF"
