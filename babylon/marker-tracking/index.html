@@ -127,8 +127,8 @@
             let webarMarkerMesh1 = new BABYLON.Mesh("webarMarkerMesh1", scene);
             let webarMarkerMesh2 = new BABYLON.Mesh("webarMarkerMesh2", scene);
 
-            webarMarkerMeshMap.push({ markerId: "ca4f2f8c-08f5-4cc5-b240-9d661a3823a9", markerMesh: webarMarkerMesh1 });
-            webarMarkerMeshMap.push({ markerId: "e3647353-09fc-4ef4-b8a6-7bf1126c83ac", markerMesh: webarMarkerMesh2 });
+            webarMarkerMeshMap.push({ markerId: "dddddddd-uuuu-mmmm-mmmm-yyyyyyy11111", markerMesh: webarMarkerMesh1 });
+            webarMarkerMeshMap.push({ markerId: "dddddddd-uuuu-mmmm-mmmm-yyyyyyy11111", markerMesh: webarMarkerMesh2 });
 
             // Append a gltf model to the scene and scale appropriately. No need to set the parent to webarStage mesh.
             // All gltf models appended to the scene are created under __root__ node by babylon.
@@ -141,7 +141,7 @@
                         // Move the loaded models to webarStage
                         mesh.setParent(webarMarkerMesh1);
 
-                        BABYLON.Quaternion.FromEulerAnglesToRef(Math.PI / 2, 0, 0, xQuat);
+                        BABYLON.Quaternion.FromEulerAnglesToRef(-Math.PI / 2, 0, 0, xQuat);
                         mesh.rotationQuaternion.multiplyInPlace(xQuat);
 
                         scaleByFactor(mesh, 6);
