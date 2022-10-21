@@ -1,4 +1,4 @@
-# Unity
+# Unity WebAR SDK Plugin
 
 ## Please download the WebAR-SDK's Unity Plugin from Blippar's website by creating your account
 
