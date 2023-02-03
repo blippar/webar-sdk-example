@@ -5,8 +5,8 @@ import './index.css';
 class UiView extends React.Component {
   render() {
     return (
-      <button className="reload" onClick={ () => {
-        console.log("Reloading...");
+      <button className="reset" onClick={ () => {
+        console.log("Reset tracking...");
         window.WEBARSDK.SetTrackingStoppedCallback(() => {
           window.WEBARSDK.StartTracking();
         });

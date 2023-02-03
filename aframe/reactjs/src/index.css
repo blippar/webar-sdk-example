@@ -2,21 +2,23 @@ body {
     font: 14px "Century Gothic", Futura, sans-serif;
 }
 
-.reload {
+.reset {
     font-family: Lucida Sans Unicode;
-    position: relative;
-    background: transparent;
+    position: absolute;
+    background: #00000088;
     color: whitesmoke;
     border: 1px solid #999;
+    border-radius: 10px;
     float: right;
+    bottom: 2%;
+    right: 2%;
     font-size: 42px;
     font-weight: bold;
-    line-height: 50px;
+    line-height: 0;
     height: 50px;
     width: 50px;
     margin-right: 10px;
     margin-top: 20px;
     padding: 0;
-    text-align: center;
     cursor:'pointer';
-}
+  }
