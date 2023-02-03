@@ -1,0 +1,22 @@
+body {
+    font: 14px "Century Gothic", Futura, sans-serif;
+}
+
+.reload {
+    font-family: Lucida Sans Unicode;
+    position: relative;
+    background: transparent;
+    color: whitesmoke;
+    border: 1px solid #999;
+    float: right;
+    font-size: 42px;
+    font-weight: bold;
+    line-height: 50px;
+    height: 50px;
+    width: 50px;
+    margin-right: 10px;
+    margin-top: 20px;
+    padding: 0;
+    text-align: center;
+    cursor:'pointer';
+}
