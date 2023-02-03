@@ -1,4 +1,4 @@
-# WebAR SDK ReactJS Example
+# ReactJS - AFrame - WebAR sdk Example
 
 ## Overview
 
