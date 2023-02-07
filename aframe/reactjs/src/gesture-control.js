@@ -5,12 +5,20 @@ class GestureControl {
         this.controlScale = this.controlScale.bind(this);
         this.controlRotation = this.controlRotation.bind(this);
         this.processGestureEvent = this.processGestureEvent.bind(this);
+
+        this.controlMoves = false;
+        this.controlEnds = false;
+        this.controlStarts = false;
+        this.isGestureControlOn = false;
+        this.interactionCallback = null;
+        this.movesCount = 0;
     }
 
-    initialize(rotationFactor = 5, minScale = 0.5, maxScale = 10) {
+    initialize(rotationFactor = 5, gestureScaleMin = 0.5, gestureScaleMax = 10, interactionCallback=null) {
         this.rotationFactor = rotationFactor;
-        this.minScale = minScale;
-        this.maxScale = maxScale;
+        this.gestureScaleMin = gestureScaleMin;
+        this.gestureScaleMax = gestureScaleMax;
+        this.interactionCallback = interactionCallback;
 
         var self = this;
 
@@ -51,6 +59,18 @@ class GestureControl {
                 self.sceneElement.removeEventListener("zoomControlMove", self.controlScale);
             }
           });
+
+        window.AFRAME.registerComponent('interact-receiver', {
+            init: function () {
+                this.el.addEventListener('click', evt => {
+                    if (!self.isGestureControlOn) {
+                        if (self.interactionCallback) {
+                            self.interactionCallback(this.el);
+                        }
+                    }
+                });
+            }
+        });      
     }
 
     processGestureEvent(event) {
@@ -58,16 +78,14 @@ class GestureControl {
 
         const previousState = this.internalState.previousState;
 
-        const controlMoves =
+        this.controlMoves =
             previousState &&
             currentState &&
             currentState.touchCount === previousState.touchCount;
+        this.controlEnds = previousState && !this.controlMoves;
+        this.controlStarts = currentState && !this.controlMoves;
 
-        const controlEnds = previousState && !controlMoves;
-
-        const controlStarts = currentState && !controlMoves;
-
-        if (controlStarts) {
+        if (this.controlStarts) {
             currentState.startTime = performance.now();
     
             currentState.startPosition = currentState.position;
@@ -80,9 +98,14 @@ class GestureControl {
             this.sceneElement.emit(eventName, currentState);
 
             this.internalState.previousState = currentState;
+            this.movesCount = 0;
         }
-    
-        if (controlMoves) {
+
+        if (this.controlMoves) {
+            if (++this.movesCount > 2) {
+                this.isGestureControlOn = true;
+            }
+
             const eventDetail = {
                 positionChange: {
                     x: currentState.position.x - previousState.position.x,
@@ -105,13 +128,17 @@ class GestureControl {
             this.sceneElement.emit(eventName, eventDetail);
         }
 
-        if (controlEnds) {
+        if (this.controlEnds) {
             const eventName =
             this.getControlName(previousState.touchCount) + "End";
     
             this.sceneElement.emit(eventName, previousState);
     
             this.internalState.previousState = null;
+            setTimeout(() => {
+                this.isGestureControlOn = false;
+            },
+            100);
         }
     }
 
@@ -180,7 +207,7 @@ class GestureControl {
         this.scaleFactor *=
         1 + evt.detail.spreadChange / evt.detail.startSpread;
 
-        this.scaleFactor = Math.min(this.maxScale, Math.max(this.scaleFactor, this.minScale));
+        this.scaleFactor = Math.min(this.gestureScaleMax, Math.max(this.scaleFactor, this.gestureScaleMin));
 
         this.targetElement.object3D.scale.x = this.scaleFactor * this.initialScale.x;
         this.targetElement.object3D.scale.y = this.scaleFactor * this.initialScale.y;
