@@ -114,7 +114,7 @@ class SceneLoader extends React.Component {
       return (
           <div>
             <a-scene
-              webar-scene="key: 0318fd72-73d9-46aa-86ff-f0881d1fcd7f"
+              webar-scene="key: xxxxxxxx-1111-2222-3333-yyyyyyyyyyyy"
               vr-mode-ui="enabled: false"
               device-orientation-permission-ui="enabled: false"
               loading-screen="enabled: false"
