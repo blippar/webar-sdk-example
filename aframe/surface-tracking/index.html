@@ -6,16 +6,21 @@
     <title>Blippar WebAR SDK</title>
 
     <script src="https://ar-libs.blippar.com/aframe/1.3.0/aframe-v1.3.0.min.js"></script>
-
+    <script src="https://unpkg.com/aframe-environment-component@1.3.2/dist/aframe-environment-component.min.js"></script>
     <!-- Step 1: Include WebAR SDK script -->
     <!-- PS: User may overload the splash screen by passing function string to on-load parameter
          e.g. on-load = "LoadMySplash()" -->
-    <script src="../../webar-sdk/webar-sdk-v1.5.1.min.js"
+    <script src="https://webar-sdk.blippar.com/releases/latest/cdn/webar-sdk.min.js"
       on-load=""
       webar-mode="surface-tracking"
       auto-init="false"
       auto-start="true"
       static-camera="true"
+      render-scene-on-desktop="true"
+      show-qr-card-on-desktop="true"
+      ios-camera-permission="false"
+      alert-border-radius="5px"
+      alert-button-border-radius="3px"
       logo-src="./images/test_logo_here.png"
       logo-width="116px"
       logo-height="116px"
@@ -87,6 +92,10 @@
           console.log(" Stop(ped) hand guide animation");
         }
       );
+
+      WEBARSDK.SetVideoStartedCallback(() => {
+        deskenv.parentNode.removeChild(deskenv);
+      });
     </script>
 
     <!-- Step 2: Add webar-scene attribute to AFrame's <a-scene> tag -->
@@ -118,14 +127,17 @@
         <a-asset-item id="astronaut" src="models/astronaut.glb"></a-asset-item>
       </a-assets>
 
+      <a-entity id="deskenv" environment="preset: starry; groundColor: #222; gridColor: #f28500;"></a-entity>
+      <a-light type="ambient" color="#000000ff"></a-light>
+
       <!-- Step 4: Add webar-stage attribute to an AFrame's parent <a-entity> tag -->
-      <a-entity webar-stage>
+      <a-entity webar-stage position="0 1 -2">
         <a-ring landingcursor id="landing" mixin="landeffect" color="#FBB42C" material="opacity: 0.4; transparent: true" radius-inner="0.8" radius-outer="1"  rotation="-90 0 0" segments-phi=30 segments-theta=96></a-ring>
 
         <!-- Step 5: Add AR models under the webar-stage node -->
           <!-- Add webar-loadmonitor attribute to the entities to display loading progress screen before starting the surface tracking -->
           <!-- Refer API:Attributes documentation for more details -->
-        <a-entity gltf-model="#astronaut" id="astronaut_1" rotation="0 0 0" position="0 0 0" scale="0.4 0.4 0.4" webar-loadmonitor="elType: glb" visible=false></a-entity>
+        <a-entity gltf-model="#astronaut" id="astronaut_1" rotation="0 0 0" position="0 0 0" scale="0.4 0.4 0.4" webar-loadmonitor="elType: glb"></a-entity>
       </a-entity>
 
     </a-scene>

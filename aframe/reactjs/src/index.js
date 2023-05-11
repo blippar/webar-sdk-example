@@ -129,6 +129,7 @@ class SceneLoader extends React.Component {
               </a-assets>
 
               <a-entity webar-stage
+                position="0 1 -2"
                 gesture-control
                 raycaster='objects: .gesturable, .interactable'
                 cursor="fuse: false; rayOrigin: mouse;"

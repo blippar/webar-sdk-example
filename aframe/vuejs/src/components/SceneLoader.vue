@@ -4,7 +4,7 @@ import SceneView from './SceneView.vue';
 
 <template>
   <a-scene
-    webar-scene="key: fca11512-0ec7-4773-85e0-a1d4b56ab49e"
+    webar-scene="key: xxxxxxxx-1111-2222-3333-yyyyyyyyyyyy"
     vr-mode-ui="enabled: false"
     device-orientation-permission-ui="enabled: false"
     loading-screen="enabled: false"

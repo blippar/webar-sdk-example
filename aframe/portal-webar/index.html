@@ -10,11 +10,16 @@
     <!-- Step 1: Include WebAR SDK script -->
     <!-- PS: User may overload the splash screen by passing function string to on-load parameter
          e.g. on-load = "LoadMySplash()" -->
-    <script src="../../webar-sdk/webar-sdk-v1.5.1.min.js"
+    <script src="https://webar-sdk.blippar.com/releases/latest/cdn/webar-sdk.min.js"
       on-load=""
       auto-init="false"
       auto-start="true"
       static-camera="true"
+      render-scene-on-desktop="false"
+      show-qr-card-on-desktop="true"
+      ios-camera-permission="false"
+      alert-border-radius="5px"
+      alert-button-border-radius="3px"
       logo-src="./images/test_logo_here.png"
       logo-width="116px"
       logo-height="116px"
