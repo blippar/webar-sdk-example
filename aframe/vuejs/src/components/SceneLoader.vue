@@ -15,7 +15,7 @@ import SceneView from './SceneView.vue';
       <a-asset-item id="testmodel" src="models/astronaut.glb"></a-asset-item>
     </a-assets>
 
-    <a-entity webar-stage>
+    <a-entity webar-stage position="0 1 -2">
       <SceneView v-if="assetsLoaded"/>
     </a-entity>
   </a-scene>
