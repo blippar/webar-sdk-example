@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="shortcut icon" href="#" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">
+
+    <title>Blippar WebAR SDK</title>
+
+    <!-- <script src="https://ar-libs.blippar.com/aframe/1.4.0/aframe-v1.4.0.min.js"></script> -->
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://webar-sdk.blippar.com/static/libs/aframe-libs/gif-shader.js"></script>
+
+
+    <!-- Step 1: Include WebAR SDK script -->
+    <!-- PS: User may overload the splash screen by passing function string to on-load parameter
+         e.g. on-load = "LoadMySplash()" -->
+    <script src="https://webar-sdk.blippar.com/releases/latest/cdn/webar-sdk.min.js"
+      on-load=""
+      webar-mode="face-tracking"
+      debug-mode="false"
+      auto-init="false"
+      auto-start="true"
+      static-camera="true"
+      enable-tracking-on-desktop="true"
+      enable-mirroring-on-desktop=""
+      show-qr-card-on-desktop="true"
+      enable-photo-ui="true"
+      logo-src="https://webar-static.blippar.com/common/blogo_new.png"
+      logo-width="116px"
+      logo-height="116px"
+      progress-dot-ring-scale="0.30"
+      progress-dot-ring-color="#FFAC1C"
+      progress-ring-scale="0.36"
+      progress-ring-color="#FFFFFF"
+      progress-ring-line-width="5"
+
+      alert-border-color="#000000"
+      alert-border-width="2px"
+      alert-background-color="#FFFFFF"
+      alert-message-text-color="#000000"
+      alert-button-color="#000000"
+      alert-button-text-color="#FFFFFF"
+      alert-button-height="30px"
+      alert-camera-permission-text="We require access to your camera for this experience to work."
+      alert-camera-permission-button-text="OK"
+      alert-motion-permission-text=""
+      alert-motion-permission-button-text=""
+      alert-box-width="250px"
+      alert-box-height="125px"
+      alert-box-font-size="17px"
+
+      ui-background-color="#FFF"
+      ui-text-color="#000"
+      ui-portrait-text="This experience is optimised for portrait display"
+      desktop-logo-src="https://webar-static.blippar.com/common/blippar_logo.png"
+      desktop-logo-width="150px"
+      desktop-logo-height="150px"
+      issue-img-src="images/test_issue_img.png"
+      issue-img-width="116px"
+      issue-img-height="116px"
+      show-guide-view="true"
+
+      auto-scan-instruction="Look for a marker to scan..."
+      auto-scan-instruction-detect="Detecting..."
+      auto-scan-instruction-idle="Move around to look for a marker"
+      auto-scan-instruction-text-style="color: orange"
+      auto-scan-style="display: none; position: absolute; top: 90%; left: 50%; transform: translate(-50%, -50%); z-index: 10000; width: auto; height: auto; text-align: center;"
+      auto-scan-style-display="block"
+      scan-btn-width="100"
+      scan-btn-height="100"
+      scan-btn-display="block"
+      scan-btn-instruction="Tap to scan"
+      scan-btn-instruction-style="color: white"
+      scan-btn-img-src="images/user_scan-btn-image_here.png"
+      scan-btn-img-width="50"
+      scan-btn-img-height="50"
+      scan-btn-img-x-coordinate="50%"
+      scan-btn-img-y-coordinate="50%"
+      scan-btn-img-transform="translate(-25, -25)"
+      scan-btn-progress-circle-cx-coordinate="50"
+
+      scan-btn-progress-circle-cy-coordinate="50"
+      scan-btn-progress-circle-radius="35"
+      scan-btn-progress-circle-style="fill: none; stroke: cyan; stroke-width: 6;"
+      scan-btn-progress-bar-cx-coordinate="50"
+      scan-btn-progress-bar-cy-coordinate="50"
+      scan-btn-progress-bar-radius="35"
+      scan-btn-progress-bar-transform="rotate(-90 50 50)"
+      scan-btn-progress-bar-color="blue"></script>
+
+
+      <style>
+        /* Style the container element */
+        .facemenu {
+          display: flex; /* Make it a flex container */
+          flex-direction: column; /* Align the children vertically */
+          align-items: center; /* Center the children horizontally */
+          justify-content: space-around; /* Distribute the children evenly along the main axis */
+          height: 375px; /* Give some height to the container */
+          width: 70px;
+          background-color: transparent; /* Give some background color to the container */
+          position: absolute;
+          bottom: 0px;
+          left: 0px;
+        }
+
+        /* Style the button elements */
+        .button {
+          width: 50px; /* Give some width to the buttons */
+          height: 50px; /* Give some height to the buttons */
+          border-radius: 50%;
+          margin: 10px; /* Add some margin around the buttons */
+          border: 0px; /* Add some border to the buttons */
+          background-color: white; /* Add some background color to the buttons */
+          color: black; /* Add some text color to the buttons */
+        }
+
+        .button.on {
+          width: 50px; /* Give some width to the buttons */
+          height: 50px; /* Give some height to the buttons */
+        }
+
+        .select_btn {
+          animation: scaleUp 400ms ease-in-out forwards;
+          transform-origin: center;
+        }
+
+        @keyframes scaleUp {
+            0% {
+                transform: scale(1)
+            }
+            70% {
+                transform: scale(1.3)
+            }
+            100% {
+                transform: scale(1.2)
+            }
+        }
+
+        .unselect_btn {
+          animation: scaleDown 200ms ease-in forwards;
+          transform-origin: center;
+        }
+
+        @keyframes scaleDown {
+            0% {
+                transform: scale(1.2)
+            }
+            100% {
+                transform: scale(1)
+            }
+        }
+
+        #palettemenu {
+          display: flex; /* Make it a flex container */
+          flex-direction: column; /* Align the children vertically */
+          align-items: center; /* Center the children horizontally */
+          justify-content: center; /* Distribute the children evenly along the main axis */
+          height: 258px; /* Give some height to the container */
+          width: 70px;
+          background-color: transparent; /* Give some background color to the container */
+          position: absolute;
+          bottom: 355px;
+          left: 0px;
+          z-index: 100;
+          visibility: hidden;
+        }
+
+        /* Style the button elements */
+        .palette {
+          width: 37px; /* Give some width to the buttons */
+          height: 37px; /* Give some height to the buttons */
+          border-radius: 50%;
+          margin: 6px; /* Add some margin around the buttons */
+          border: 0px; /* Add some border to the buttons */
+          background-color: white; /* Add some background color to the buttons */
+          color: black; /* Add some text color to the buttons */
+          border: 3px solid transparent; /* Add some border to the buttons */
+        }
+
+        .palette.on {
+          border: 3px solid white; /* Add some border to the buttons */
+          width: 40px; /* Give some width to the buttons */
+          height: 40px; /* Give some height to the buttons */
+        }
+
+        .popup_menu {
+          animation: popUp 200ms ease-in forwards;
+          transform-origin: bottom center;
+        }
+
+        @keyframes popUp {
+            0% {
+                transform: scaleY(0)
+            }
+            100% {
+                transform: scaleY(1)
+            }
+        }
+
+        .popdown_menu {
+          animation: popDown 200ms ease-out forwards;
+          transform-origin: bottom center;
+        }
+
+        @keyframes popDown {
+            0% {
+                transform: scaleY(1)
+            }
+            100% {
+                transform: scaleY(0)
+            }
+        }
+
+        #demotitle {
+          visibility: visible;
+          width: 100vmin;
+          height: 15vmin;
+          transform: translateX(-50%);
+          background-color: transparent;
+          color: #fff;
+          text-align: center;
+          border-radius: 2px;
+          padding: 16px;
+          position: fixed;
+          z-index: 1;
+          left: 50%;
+          top: 30px;
+          font-family: 'Pacifico', 'sans-serif';
+          font-size: 30px;
+          text-shadow: 2px 2px tomato;
+          -webkit-user-select: none;
+          user-select: none;
+        }
+  </style>
+  </head>
+
+  <body>
+
+    <audio id="halloweenbgm" src="https://webar-sdk.blippar.com/static/audios/LofiHalloweenMusic.mp3" preload="true" autoplay="false" loop></audio>
+    <audio id="halloweenroar" src="https://webar-sdk.blippar.com/static/audios/roar.mp3" preload="true" autoplay="false"></audio>
+
+    <script>
+      // Initializing values
+      var isRoarPlaying = false;
+
+      // On video playing toggle values
+      halloweenroar.onplaying = function() {
+        isRoarPlaying = true;
+      };
+
+      // On video pause toggle values
+      halloweenroar.onpause = function() {
+        isRoarPlaying = false;
+      };
+
+      // Play video function
+      async function playRoar() {      
+          if (halloweenroar.paused && !isRoarPlaying) {
+            halloweenroar.currentTime = 0;
+            return halloweenroar.play();
+          }
+      } 
+
+      // Pause video function
+      function pauseRoar() {     
+          if (!halloweenroar.paused && isRoarPlaying) {
+            halloweenroar.pause();
+          }
+      }
+
+      AFRAME.registerComponent('plane-occluder', {
+      init: function() {
+        this.material = this.el.getObject3D('mesh').material = new THREE.MeshStandardMaterial({color: new THREE.Color(0x00ff00), colorWrite: false});
+        // this.renderOrder = 0;
+        // this.blendMode = THREE.SubtractiveBlending;
+        this.material.needsUpdate = true;
+      }
+    });
+
+      AFRAME.registerComponent('mouth-fire', {
+        init: function() {
+
+        },
+        tick: function() {
+          if (WEBARSDK) {
+            if (currentFilterIndex === 2) { // Halloween face filter
+              let mouthmgt = WEBARSDK.GetMouthOpenedMagnitude();
+              let scale = 1 * (mouthmgt) * 1.2;
+              fmodel2e.setAttribute('visible', true);
+              fmodel2e.setAttribute('scale', scale + ' ' + scale + ' ' + scale);
+              const initYpos = -0.8;
+              if (mouthmgt> 0.1) {
+                let ypos = initYpos * mouthmgt
+                ypos = Math.max(-0.7, Math.min(ypos, initYpos));
+                this.el.object3D.position.y = ypos;
+                playRoar();
+              }
+              else {
+                pauseRoar();
+                fmodel2e.setAttribute('visible', false);
+              }
+              this.el.setAttribute('radius', 1 * (mouthmgt/3));
+            }
+            else {
+              pauseRoar();
+            }
+          }
+        }
+      });
+
+    </script>
+
+    <!-- Step 2: Add webar-scene attribute to AFrame's <a-scene> tag -->
+      <!-- Provide a valid Blippar license-key value in the key: property  -->
+    <a-scene
+      webar-scene="key: xxxxxxxx-1111-2222-3333-yyyyyyyyyyyy"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+      loading-screen="enabled: false"
+      renderer="colorManagement: true; antialias: true; physicallyCorrectLights: false;">
+
+        <!-- Step 3: Add webar-camera attribute to AFrame's <a-entity camera> tag -->
+        <a-camera webar-camera></a-camera>
+
+        <a-assets timeout="60000">
+          <a-asset-item id="hider" src="models/head_hider.glb"></a-asset-item>
+          <a-asset-item id="fuel_glass" src="models/Fuel-glass.glb"></a-asset-item>
+          <a-asset-item id="pumpkin" src="models/Pumpkin.glb"></a-asset-item>
+          <a-asset-item id="pink_rose" src="models/pink_rose.glb"></a-asset-item>
+          <a-asset-item id="human_head" src="models/human_head.glb"></a-asset-item>
+          <a-asset-item id="human_head_blunt" src="models/human_head_blunt.glb"></a-asset-item>
+
+          <img id="liptexture" src="images/lipmask.png" alt=""/>
+          <img id="firegiftexture" src="images/fire.gif" alt=""/>
+          <img id="facetexture" src="images/sugar-skull-face.png" alt=""/>
+
+          <video id="holivideo" src="videos/HoliGfx.mp4" loop></video>
+        </a-assets>
+
+        <!-- Step 4: optional to display the webcam video in the background. If you want to display a blank screen, set visible=false to this entity -->
+        <a-plane id="webar-video-plane" visible="true"></a-plane>
+
+        <!-- Step 5: Add webar-facemesh attribute to <a-entity> tag. 
+          This is used to display the face mesh. Change only the material attribute of this entity display different masks.
+          Set visible=false, if not face mesh is needed -->
+        <a-plane id="facemesh" webar-facemesh material="transparent: true; opacity: 0;"></a-plane>
+
+        <!-- Step 6: Add webar-face attribute to an AFrame's parent <a-entity> tag -->
+            <!-- The child elements of the webar-face displays the 3d model on the tracked face. -->
+            <!-- Origin of the face is at the center of the line connecting the two eyes. -->
+            <!-- Add webar-loadmonitor attribute to the entities to display loading progress screen before starting the face tracking -->
+            <!-- Refer API Reference documentation for more details -->
+
+        <a-light id="topdirlight" intensity="4" color="#ffffff" light="castShadow:false; type:directional" position="0 5 1"></a-light>
+        <a-light id="bottomdirlight" intensity="2" color="#ffffff" light="castShadow:false; type:directional" position="0 -3 1"></a-light>
+        <a-light id="amblight" intensity="2" color="#ffffff" light="type:ambient"></a-light>
+
+        <a-entity webar-face id="webarface">
+          <!-- <a-entity id="fmodel" visible="true" gltf-model="#human_head" id="headmodel" rotation="10 0 0" position="0 0 -0.1" scale="1.1 1.1 1.1" webar-loadmonitor="elType: glb"></a-entity> -->
+          <a-entity id="fmodel0a" visible="false" gltf-model="#human_head" rotation="0 0 0" position="0 0 0" scale="1.05 1.05 1.05" webar-loadmonitor="elType: glb" webar-occluder></a-entity>
+          <!-- <a-entity id="fmodel0a" visible="false" gltf-model="#hider" rotation="5 0 0" position="0 0 -0.15" scale="0.475 0.475 0.475" webar-loadmonitor="elType: glb"></a-entity> -->
+          <a-entity id="fmodel0b" visible="false" gltf-model="#fuel_glass" rotation="0 0 0" position="0 0.05 0" scale="0.075 0.075 0.075" webar-loadmonitor="elType: glb"></a-entity>
+          <a-entity id="fmodel1" visible="false" gltf-model="#pink_rose" rotation="90 -30 0" position="-0.5 0.3 0.1" scale="5 5 5" webar-loadmonitor="elType: glb"></a-entity>
+          <a-entity id="fmodel2b" visible="false" gltf-model="#human_head_blunt" rotation="10 0 0" position="0 0 -0.1" scale="1.1 1.1 1.1" webar-loadmonitor="elType: glb" webar-occluder></a-entity>
+          <a-entity id="fmodel2a" visible="false" gltf-model="#pumpkin" rotation="15 0 0" position="0 0 -0.1" scale="0.03 0.03 0.03" webar-loadmonitor="elType: glb"></a-entity>
+          <a-plane id="fmodel2c" visible="false" material="shader:gif; src: #firegiftexture; transparent: true; opacity: 0.8;" position="0.45 -0.1 0.2" scale="0.75 0.75 0.75" rotation="0 30 0"></a-plane>
+          <a-plane id="fmodel2d" visible="false" material="shader:gif; src: #firegiftexture; transparent: true; opacity: 0.8;" position="-0.45 -0.1 0.2" scale="0.75 0.75 0.75" rotation="0 -25 0"></a-plane>
+          <a-plane id="fmodel2f" visible="false" color="green" position="0 -0.25 0.26" width="0.3" height="0.5" rotation="0 0 0" plane-occluder></a-plane>
+          <a-plane id="fmodel2e" visible="false" material="shader:gif; src: #firegiftexture; transparent: true; opacity: 0.8;" position="0 -0.8 0.25" scale="2 1 2" rotation="-13 0 180" mouth-fire></a-plane>
+        </a-entity>
+      </a-scene>
+
+      <!-- Create the container element -->
+      <div id="palettemenu">
+        <div id="ff4d" class="palette" style="background-color:#6F4647;"></div>
+        <div id="ff4c" class="palette" style="background-color:#980012;"></div>
+        <div id="ff4b" class="palette" style="background-color:#E32531;"></div>
+        <div id="ff4a" class="palette" style="background-color:#CA6668;"></div>
+      </div>
+
+      <div class="facemenu">
+        <!-- Create four button elements inside the container -->
+        <img id="ff4" class="button" src="images/lipstick_icon.jpg" alt="Lipstick Try on"/>
+        <img id="ff3" class="button" src="images/holi_icon.jpg" alt="Holi"/>
+        <img id="ff2" class="button" src="images/haloween_icon.jpg" alt="Haloween"/>
+        <img id="ff1" class="button" src="images/diadelosmuertos.jpg" alt="Dia de los Muertos"/>
+        <img id="ff0" class="button on" src="images/coolers_icon.jpg" alt="Try on"/>
+      </div>
+
+      <div id="demotitle"></div>
+
+    <!-- Refer API:Functions documentation for more details -->
+    <script>
+      WEBARSDK.Init();
+
+      var webarVideoPlane = document.getElementById('webar-plane');
+
+      let reflectionMap = new THREE.TextureLoader().load("images/poly_haven_studio_1k.jpg");
+      reflectionMap.encoding = THREE.sRGBEncoding;   
+      reflectionMap.mapping = THREE.EquirectangularReflectionMapping;
+      document.querySelector('a-scene').object3D.environment = reflectionMap;
+
+      var filterBtns = [ ff0, ff1, ff2, ff3, ff4 ];
+      var currentFilterIndex = 0;
+
+      var paletteBtns = [ ff4a, ff4b, ff4c, ff4d ];
+      var currentPaletteIndex = 0;
+
+      for (let i = 0; i < filterBtns.length; ++i) {
+        filterBtns[i].addEventListener('click', () => {
+          enableFaceFilter(i);
+        });
+      }
+
+      for (let i = 0; i < paletteBtns.length; ++i) {
+        paletteBtns[i].addEventListener('click', () => {
+          enableColorPalette(i);
+        });
+      }
+
+      function toggleButton(activateIndex) {
+        for (let i=0; i < filterBtns.length; ++i) {
+          if (i === activateIndex) {
+            filterBtns[i].classList.add('on');
+            filterBtns[i].classList.remove('unselect_btn');
+            filterBtns[i].classList.add('select_btn');
+          }
+          else {
+            filterBtns[i].classList.remove('on');
+            filterBtns[i].classList.remove('select_btn');
+            filterBtns[i].classList.add('unselect_btn');
+          }
+        }
+      }
+
+      function togglePalette(activateIndex) {
+        for (let i=0; i < paletteBtns.length; ++i) {
+          if (i === activateIndex) {
+            paletteBtns[i].classList.add('on');
+          }
+          else {
+            paletteBtns[i].classList.remove('on');
+          }
+        }
+      }
+
+      function enableFaceFilter(activateIndex) {
+        toggleButton(activateIndex);
+
+        switch (currentFilterIndex) {
+          case 0:
+            fmodel0a.setAttribute('visible', false);
+            fmodel0b.setAttribute('visible', false);
+            facemesh.setAttribute('material', 'opacity', 0);
+            break;
+
+          case 1:
+            fmodel1.setAttribute('visible', false);
+            facemesh.setAttribute('material', 'opacity', 0);
+            break;
+
+          case 2:
+            fmodel2a.setAttribute('visible', false);
+            fmodel2b.setAttribute('visible', false);
+            fmodel2c.setAttribute('visible', false);
+            fmodel2d.setAttribute('visible', false);
+            fmodel2e.setAttribute('visible', false);
+            fmodel2f.setAttribute('visible', false);
+            facemesh.setAttribute('material', 'opacity', 0);
+            break;
+
+          case 3:
+            facemesh.setAttribute('material', 'opacity', 0);
+            break;
+
+          case 4:
+            facemesh.setAttribute('material', 'opacity', 0);
+            palettemenu.classList.remove('popup_menu');
+            palettemenu.classList.add('popdown_menu');
+            break;
+
+          default:
+            break;
+        }
+
+        switch (activateIndex) {
+          case 0:
+            setTitle('Try On');
+            fmodel0a.setAttribute('visible', true);
+            fmodel0b.setAttribute('visible', true);
+
+            facemesh.setAttribute('material', 'opacity', 0);
+
+            webarVideoPlane.setAttribute('color', 'white');
+
+            bottomdirlight.setAttribute("color", "white");
+            topdirlight.setAttribute("visible", true);
+            amblight.setAttribute("visible", true);
+            topdirlight.setAttribute("intensity", 5);
+
+            halloweenbgm.pause();
+            halloweenroar.pause();
+            holivideo.pause();
+
+            break;
+
+          case 1:
+            fmodel1.setAttribute('visible', true);
+            setTitle('Dia De Los Muertos');
+
+            facemesh.setAttribute('material', 'src', '#facetexture');
+            facemesh.setAttribute('material', 'side', 'front');
+            facemesh.setAttribute('material', 'transparent', 'false');
+            facemesh.setAttribute('material', 'alphaTest', '0.5');
+            facemesh.setAttribute('material', 'color', '#fff');
+            facemesh.setAttribute('material', 'shader', 'flat');
+            facemesh.setAttribute('material', 'opacity', 1);
+
+            webarVideoPlane.setAttribute('color', 'white');
+
+            bottomdirlight.setAttribute("color", "white");
+            topdirlight.setAttribute("visible", true);
+            amblight.setAttribute("visible", true);
+            topdirlight.setAttribute("intensity", 1);
+
+            halloweenbgm.pause();
+            halloweenroar.pause();
+            holivideo.pause();
+
+            break;
+
+            case 2:
+            setTitle('Halloween');
+            fmodel2a.setAttribute('visible', true);
+            fmodel2b.setAttribute('visible', true);
+            fmodel2c.setAttribute('visible', true);
+            fmodel2d.setAttribute('visible', true);
+            fmodel2e.setAttribute('visible', true);
+            fmodel2f.setAttribute('visible', true);
+            facemesh.setAttribute('material', 'opacity', 0);
+
+            webarVideoPlane.setAttribute('color', '#8954C9');
+
+            bottomdirlight.setAttribute("color", "tomato");
+            topdirlight.setAttribute("visible", false);
+            amblight.setAttribute("visible", false);
+
+            halloweenbgm.volume = 0.4;
+            halloweenbgm.currentTime = 0;
+            halloweenbgm.play();
+            halloweenroar.play().then(() => {
+              halloweenroar.pause();
+            });
+            holivideo.pause();
+
+            break;
+          case 3:
+            setTitle('Holi');
+
+            facemesh.setAttribute('material', 'src', '#holivideo');
+            facemesh.setAttribute('material', 'side', 'front');
+            facemesh.setAttribute('material', 'transparent', 'true');
+            facemesh.setAttribute('material', 'alphaTest', '0');
+            facemesh.setAttribute('material', 'color', '#fff');
+            facemesh.setAttribute('material', 'shader', 'flat');
+            facemesh.setAttribute('material', 'opacity', 0.5);
+
+            webarVideoPlane.setAttribute('color', 'white');
+
+            bottomdirlight.setAttribute("color", "white");
+            topdirlight.setAttribute("visible", true);
+            amblight.setAttribute("visible", true);
+            topdirlight.setAttribute("intensity", 2);
+            holivideo.currentTime = 0;
+
+            halloweenbgm.pause();
+            halloweenroar.pause();
+            holivideo.play();
+
+            break;
+
+          case 4:
+            setTitle('Lipstick');
+
+            facemesh.setAttribute('material', 'src', '#liptexture');
+            facemesh.setAttribute('material', 'side', 'front');
+            facemesh.setAttribute('material', 'alphaTest', '0');
+            facemesh.setAttribute('material', 'transparent', 'true');
+            facemesh.setAttribute('material', 'color', 'blue');
+            facemesh.setAttribute('material', 'shader', 'flat');
+            facemesh.setAttribute('material', 'opacity', 1);
+
+            webarVideoPlane.setAttribute('color', 'white');
+
+            palettemenu.classList.remove('popdown_menu');
+            palettemenu.classList.add('popup_menu');
+            palettemenu.style.visibility = 'visible';
+            enableColorPalette(currentPaletteIndex);
+
+            bottomdirlight.setAttribute("color", "white");
+            topdirlight.setAttribute("visible", true);
+            amblight.setAttribute("visible", true);
+            topdirlight.setAttribute("intensity", 2);
+
+            halloweenbgm.pause();
+            halloweenroar.pause();
+            holivideo.pause();
+
+            break;
+
+          default:
+            break;
+        }
+
+        currentFilterIndex = activateIndex;
+      }
+
+      function enableColorPalette(activateIndex) {
+        togglePalette(activateIndex);
+
+        facemesh.setAttribute('material', 'color', paletteBtns[activateIndex].style.backgroundColor);
+        currentPaletteIndex = activateIndex;
+      }
+
+      function setTitle(text) {
+        demotitle.innerHTML = text;
+      }
+
+      // default filter
+      enableFaceFilter(0);
+
+    </script>
+  </body>
+</html>
