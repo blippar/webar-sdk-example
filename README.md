@@ -17,7 +17,7 @@ Supports Android Chrome and iOS Safari.
 [face-tracking-basics-qrcode]: https://github.com/blippar/webar-sdk-example/raw/main/assets/face-tracking-qrcode.png "QR Code"
 
 [face-trynow-url]: https://webar-sdk.blippar.com/webar-sdk-example/latest/aframe/face-tracking/face-trynow.html "Live Demo"
-[face-trynow-gif]: https://github.com/blippar/webar-sdk-example/raw/main/assets/face-trynow.gif "Face - Try Now!"
+[face-trynow-gif]: https://github.com/blippar/webar-sdk-example/raw/main/assets/face-trynow-2.gif "Face - Try Now!"
 [face-trynow-qrcode]: https://github.com/blippar/webar-sdk-example/raw/main/assets/face-trynow-qrcode.png "QR Code"
 
 
