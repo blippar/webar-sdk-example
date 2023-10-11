@@ -6,6 +6,21 @@ Supports Android Chrome and iOS Safari.
 
 ## AFrame
 
+| face-tracking (Basic) | face-tracking - Trynow! (Advanced) |
+| ------------- | ------------- |
+| [Live Demo][face-tracking-basics-url]  | [Live Demo][face-trynow-url]  |
+|![Demo][face-tracking-basics-gif]  | ![Demo][face-trynow-gif]  |
+|![QR Code][face-tracking-basics-qrcode]  | ![QR Code][face-trynow-qrcode]  |
+
+[face-tracking-basics-url]: https://webar-sdk.blippar.com/webar-sdk-example/latest/aframe/face-tracking/index.html "Live Demo"
+[face-tracking-basics-gif]: https://github.com/blippar/webar-sdk-example/raw/main/assets/face-tracking-basics.gif "Face Tracking"
+[face-tracking-basics-qrcode]: https://github.com/blippar/webar-sdk-example/raw/main/assets/face-tracking-qrcode.png "QR Code"
+
+[face-trynow-url]: https://webar-sdk.blippar.com/webar-sdk-example/latest/aframe/face-tracking/face-trynow.html "Live Demo"
+[face-trynow-gif]: https://github.com/blippar/webar-sdk-example/raw/main/assets/face-trynow.gif "Face - Try Now!"
+[face-trynow-qrcode]: https://github.com/blippar/webar-sdk-example/raw/main/assets/face-trynow-qrcode.png "QR Code"
+
+
 | surface-tracking  | portal-webar | marker-tracking |
 | ------------- | ------------- | ------------- |
 | [Live Demo][surface-tracking-demo-url]  | [Live Demo][portal-webar-demo-url]  | [Live Demo][marker-tracking-demo-url]  |

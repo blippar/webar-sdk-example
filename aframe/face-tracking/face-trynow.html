@@ -394,8 +394,10 @@
     <!-- Refer API:Functions documentation for more details -->
     <script>
       WEBARSDK.Init();
+      WEBARSDK.SetEyesMeshFilled(true);
+      WEBARSDK.SetMouthMeshFilled(true);
 
-      var webarVideoPlane = document.getElementById('webar-plane');
+      var webarVideoPlane = document.getElementById('webar-video-plane');
 
       let reflectionMap = new THREE.TextureLoader().load("images/poly_haven_studio_1k.jpg");
       reflectionMap.encoding = THREE.sRGBEncoding;   
