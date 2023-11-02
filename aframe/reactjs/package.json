@@ -13,7 +13,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "HTTPS=true HOST=192.168.68.104 SSL_CRT_FILE=~/ssl/192.168.68.104.pem SSL_KEY_FILE=~/ssl/192.168.68.104-key.pem react-scripts start",
+    "start": "HTTPS=true HOST=192.168.0.175 SSL_CRT_FILE=/Users/amandeepsingh/ssl/192.168.0.175.pem SSL_KEY_FILE=/Users/amandeepsingh/ssl/192.168.0.175-key.pem react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

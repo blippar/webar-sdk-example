@@ -16,7 +16,7 @@
         <!-- PS: User may overload the splash screen by passing function string to on-load parameter
          e.g. on-load = "LoadMySplash()" -->
 
-        <script src="https://webar-sdk.blippar.com/releases/latest/cdn/webar-sdk.min.js?license-key=xxxxxxxx-1111-2222-3333-yyyyyyyyyyyy"
+        <script src="https://webar-sdk.blippar.com/releases/1.7.1/webar-sdk-v1.7.1.min.js?license-key=xxxxxxxx-1111-2222-3333-yyyyyyyyyyyy"
           on-load=""
           webar-mode="surface-tracking"
           auto-init="true"
@@ -83,13 +83,27 @@
         var engine = null;
         var sceneToRender = null;
         var webarStage = null;
-        var scaleByFactor = function(obj, factor) {
+        var scaleByFactor = function (obj, factor) {
             obj.scaling.x = obj.scaling.x * factor;
             obj.scaling.y = obj.scaling.y * factor;
             obj.scaling.z = obj.scaling.z * factor;
         }
 
-        var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
+        function adjustMeshForDevice() {
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                return {
+                    angle: -Math.PI / 2,
+                    yMeshPosition: 0.2
+                };
+            } else {
+                return {
+                    angle: Math.PI / 2,
+                    yMeshPosition: -0.2
+                };
+            }
+        }
+
+        var createDefaultEngine = function () { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true, disableWebGL2Support: false }); };
         var createScene = function () {
             var scene = new BABYLON.Scene(engine);
             scene.environmentTexture = BABYLON.CubeTexture.CreateFromPrefilteredData("./models/environment.dds", scene);
@@ -101,6 +115,10 @@
 
             // Create an empty webarStage mesh. Models/meshes appended as a children to this webarStage mesh will be displayed on the surface.
             webarStage = new BABYLON.Mesh("webarStage", scene);
+
+            // Create a webar-cusor-target, an empty mesh to control AR Objects
+            var webarCursorTargetMesh = new BABYLON.Mesh("webar-cursor-target", scene);
+            webarCursorTargetMesh.setParent(webarStage);
 
             // Create a time varying PBR material for the base cylinder mesh
             var pbr = new BABYLON.PBRMaterial("pbr", scene);
@@ -116,33 +134,37 @@
                 pbr.subSurface.tintColor.b = pbr.subSurface.tintColor.g;
             }
 
-            // Create primitive shape using mesh builder and set webarStage as its parent so that it appears on the surface
-            var cylinder = BABYLON.MeshBuilder.CreateCylinder("cylinder", {height: 0.5, diameterTop: 1, diameterBottom: 1, tessellation: 128}, scene);
+            // Create primitive shape using mesh builder and set webarCursorTargetMesh as its parent so that it appears on the surface
+            var cylinder = BABYLON.MeshBuilder.CreateCylinder("cylinder", { height: 0.35 * 0.80, diameterTop: .75 * 0.75, diameterBottom: .75 * 0.75, tessellation: 128 }, scene);
             cylinder.material = pbr;
-            cylinder.position.y = 0.125;
-            cylinder.position.z = -0.075;
-            cylinder.setParent(webarStage);
+            cylinder.setParent(webarCursorTargetMesh);
 
             // Start spark and smoke particles
-            startParticles(scene, webarStage);
+            startParticles(scene, webarCursorTargetMesh);
 
-            // Import a gltf model to the scene and scale appropriately. No need to set the parent to webarStage mesh.
+            // Import a gltf model to the scene and scale appropriately. No need to set the parent to webarCursorTargetMesh mesh.
             // All gltf models imported to the scene are created under __root__ node by babylon.
-            // After the complete scene is ready, it is models under __root_ node are moved to webarStage mesh
+            // After the complete scene is ready, it is models under __root_ node are moved to webarCursorTargetMesh mesh
             // to appear on the surface
             BABYLON.SceneLoader.ImportMesh(['Object_2'], "./models/", "oscar_trophy.glb", scene, function (meshes, particleSystems, skeletons) {
+                const deviceAdjustments = adjustMeshForDevice();
+                let angle = deviceAdjustments.angle;
+                let yMeshPosition = deviceAdjustments.yMeshPosition;
+
                 let xQuat = new BABYLON.Quaternion();
-                BABYLON.Quaternion.FromEulerAnglesToRef(Math.PI / 2, 0, 0, xQuat);
+                BABYLON.Quaternion.FromEulerAnglesToRef(angle, 0, 0, xQuat);
 
                 for (mesh of meshes) {
                     if (mesh.name !== '__root__') {
-                        // Move the loaded models to webarStage
-                        mesh.setParent(webarStage);
+                        // Move the loaded models to webarCursorTargetMesh
+                        mesh.setParent(webarCursorTargetMesh);
                         mesh.rotationQuaternion.multiplyInPlace(xQuat);
-
+                        mesh.position.y = yMeshPosition;
                         scaleByFactor(mesh, 0.0375);
                     }
                 }
+
+                window.webarCursorTargetMesh = webarCursorTargetMesh;
 
                 // Pass babylon canvas, scene, camera and webarStage mesh to WebarSdk to initialize surface tracking
                 WEBARSDK.InitBabylonJs(canvas, scene, camera, webarStage);
@@ -162,14 +184,14 @@
         var smokesystem = null;
 
         var startParticles = function (scene, fountain) {
-            let sphereSpark = BABYLON.MeshBuilder.CreateSphere("sphereSpark", {diameter: 0.4, segments: 32}, scene);
+            let sphereSpark = BABYLON.MeshBuilder.CreateSphere("sphereSpark", { diameter: 0.4, segments: 32 }, scene);
             sphereSpark.isVisible = false;
             sphereSpark.setParent(fountain);
             BABYLON.ParticleHelper.ParseFromFileAsync(null, "./models/spark_particles.json", scene, false).then(system => {
                 sparksystem = system;
                 system.emitter = sphereSpark;
             });
-            let sphereSmoke = BABYLON.MeshBuilder.CreateSphere("sphereSmoke", {diameter: 1.9, segments: 32}, scene);
+            let sphereSmoke = BABYLON.MeshBuilder.CreateSphere("sphereSmoke", { diameter: 1.9, segments: 32 }, scene);
             sphereSmoke.isVisible = false;
             sphereSmoke.setParent(fountain);
             BABYLON.ParticleHelper.ParseFromFileAsync(null, "./models/smoke_particles.json", scene, false).then(system => {
@@ -178,12 +200,12 @@
             });
         };
 
-        window.initFunction = async function() {
-            var asyncEngineCreation = async function() {
+        window.initFunction = async function () {
+            var asyncEngineCreation = async function () {
                 try {
                     return createDefaultEngine();
-                } catch(e) {
-                console.log("the available createEngine function failed. Creating the default engine instead");
+                } catch (e) {
+                    console.log("the available createEngine function failed. Creating the default engine instead");
                     return createDefaultEngine();
                 }
             }
@@ -233,7 +255,7 @@
 
                 ++toggleCounter;
             },
-            3000);
+                3000);
         });
 
     </script>
