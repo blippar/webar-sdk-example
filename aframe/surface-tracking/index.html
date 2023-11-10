@@ -63,7 +63,6 @@
       show-guide-view="true"
       show-guide-animation-url=""></script>
 
-      <script src="https://webar-sdk.blippar.com/aframe/superframe/components/aframe-animation-timeline-component.min.js"></script>
   </head>
 
   <body>
@@ -71,23 +70,6 @@
      <!-- Refer API:Functions documentation for more details -->
      <script>
       WEBARSDK.Init();
-
-      // Sets the webar mode if not defined earlier or enable lazy mode in webar-mode parameter
-      // WEBARSDK.SetWebARMode("surface-tracking");
-      AFRAME.registerComponent("landingcursor", {
-        init: function() {
-          // Give a callback when the WebAR Stage <a-entity webar-stage> is ready  to display the 3d object
-          WEBARSDK.SetStageReadyCallback(() => {
-            console.log('Stage is ready now!!!');
-            this.el.emit('landit');
-          });
-
-          this.el.addEventListener("animationcomplete__cursorend", e => {
-            document.getElementById('astronaut_1').setAttribute('visible', true);
-            this.el.setAttribute('visible', false);
-          });
-        }
-      });
 
       WEBARSDK.SetGuideViewCallbacks(
         startGuideViewCallback = () => {
