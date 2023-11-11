@@ -12,9 +12,9 @@ Supports Android Chrome and iOS Safari.
 |![Demo][face-tracking-basics-gif]  | ![Demo][face-trynow-gif]  |
 |![QR Code][face-tracking-basics-qrcode]  | ![QR Code][face-trynow-qrcode]  |
 
-[face-tracking-basics-url]: https://webar-sdk.blippar.com/webar-sdk-example/latest/aframe/face-tracking/index.html "Live Demo"
-[face-tracking-basics-gif]: assets/face-tracking-basics-3.gif "Face Tracking"
-[face-tracking-basics-qrcode]: assets/face-tracking-qrcode.png "QR Code"
+[face-tracking-basics-url]: "https://webar-sdk.blippar.com/webar-sdk-example/latest/aframe/face-tracking/index.html" "Live Demo"
+[face-tracking-basics-gif]: "assets/face-tracking-basics-3.gif" "Face Tracking"
+[face-tracking-basics-qrcode]: "assets/face-tracking-qrcode.png" "QR Code"
 
 [face-trynow-url]: https://webar-sdk.blippar.com/webar-sdk-example/latest/aframe/face-tracking/face-trynow.html "Live Demo"
 [face-trynow-gif]: assets/face-trynow-3.gif "Face - Try Now!"
