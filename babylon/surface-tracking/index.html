@@ -83,14 +83,18 @@
         var engine = null;
         var sceneToRender = null;
         var webarStage = null;
+        var webarUXControl = null;
         var scaleByFactor = function (obj, factor) {
             obj.scaling.x = obj.scaling.x * factor;
             obj.scaling.y = obj.scaling.y * factor;
             obj.scaling.z = obj.scaling.z * factor;
         }
 
-        function adjustMeshForDevice() {
-            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        function adjustMeshForDevice(webarUXControlMesh) {
+            const disableStageCursor = !(webarUXControlMesh?.webarOptions?.stageCursorUX) ?? true;
+
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && !disableStageCursor) {
+
                 return {
                     angle: -Math.PI / 2,
                     yMeshPosition: 0.2
@@ -116,9 +120,16 @@
             // Create an empty webarStage mesh. Models/meshes appended as a children to this webarStage mesh will be displayed on the surface.
             webarStage = new BABYLON.Mesh("webarStage", scene);
 
-            // Create a webar-cusor-target, an empty mesh to control AR Objects
-            var webarCursorTargetMesh = new BABYLON.Mesh("webar-cursor-target", scene);
-            webarCursorTargetMesh.setParent(webarStage);
+            //  Create a 'webar-ux-control' Mesh
+            webarUXControl = new BABYLON.Mesh("webar-ux-control", scene);
+            webarUXControl.setParent(webarStage); // Set webarStage as parent to webarUXControl mesh so that it appears on the surface
+
+            // Set webar options to webarUXControl mesh to enable/disable stage cursor UX, user gesture rotation and scaling
+            webarUXControl.webarOptions = {
+                stageCursorUX: true,
+                userGestureRotation: true,
+                userGestureScale: true
+            };
 
             // Create a time varying PBR material for the base cylinder mesh
             var pbr = new BABYLON.PBRMaterial("pbr", scene);
@@ -134,20 +145,21 @@
                 pbr.subSurface.tintColor.b = pbr.subSurface.tintColor.g;
             }
 
-            // Create primitive shape using mesh builder and set webarCursorTargetMesh as its parent so that it appears on the surface
+            // Create primitive shape using mesh builder and set webarUXControl as its parent so that it appears on the surface
             var cylinder = BABYLON.MeshBuilder.CreateCylinder("cylinder", { height: 0.35 * 0.80, diameterTop: .75 * 0.75, diameterBottom: .75 * 0.75, tessellation: 128 }, scene);
             cylinder.material = pbr;
-            cylinder.setParent(webarCursorTargetMesh);
+            cylinder.setParent(webarUXControl);
 
             // Start spark and smoke particles
-            startParticles(scene, webarCursorTargetMesh);
+            startParticles(scene, webarUXControl);
 
-            // Import a gltf model to the scene and scale appropriately. No need to set the parent to webarCursorTargetMesh mesh.
+            // Import a gltf model to the scene and scale appropriately. No need to set the parent to webarUXControl mesh.
             // All gltf models imported to the scene are created under __root__ node by babylon.
-            // After the complete scene is ready, it is models under __root_ node are moved to webarCursorTargetMesh mesh
+            // After the complete scene is ready, it is models under __root_ node are moved to webarUXControl mesh
             // to appear on the surface
             BABYLON.SceneLoader.ImportMesh(['Object_2'], "./models/", "oscar_trophy.glb", scene, function (meshes, particleSystems, skeletons) {
-                const deviceAdjustments = adjustMeshForDevice();
+                let webarUXControlMesh = webarStage.getChildMeshes().find(mesh => mesh.name === "webar-ux-control");
+                const deviceAdjustments = adjustMeshForDevice(webarUXControlMesh);
                 let angle = deviceAdjustments.angle;
                 let yMeshPosition = deviceAdjustments.yMeshPosition;
 
@@ -156,18 +168,16 @@
 
                 for (mesh of meshes) {
                     if (mesh.name !== '__root__') {
-                        // Move the loaded models to webarCursorTargetMesh
-                        mesh.setParent(webarCursorTargetMesh);
+                        // Move the loaded models to webarUXControl
+                        mesh.setParent(webarUXControl);
                         mesh.rotationQuaternion.multiplyInPlace(xQuat);
                         mesh.position.y = yMeshPosition;
                         scaleByFactor(mesh, 0.0375);
                     }
                 }
 
-                window.webarCursorTargetMesh = webarCursorTargetMesh;
-
-                // Pass babylon canvas, scene, camera and webarStage mesh to WebarSdk to initialize surface tracking
-                WEBARSDK.InitBabylonJs(canvas, scene, camera, webarStage);
+                // Pass babylon canvas, scene, camera, webarStage mesh & webarUXControl(optional) to WebarSdk to initialize surface tracking
+                WEBARSDK.InitBabylonJs(canvas, scene, camera, webarStage, webarUXControl);
 
                 webarStage.position.x = 0;
                 webarStage.position.y = -0.5;
