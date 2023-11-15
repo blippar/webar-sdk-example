@@ -28,7 +28,7 @@ Supports Android Chrome and iOS Safari.
 |![Demo][surface-tracking-demo-gif]  | ![Demo][portal-webar-demo-gif]  | ![Demo][marker-tracking-demo-gif]  |
 |![QR Code][surface-tracking-qrcode]  | ![QR Code][portal-webar-qrcode]  | ![QR Code][marker-tracking-qrcode]  |
 
-[surface-tracking-demo-url]: https://webar-sdk.blippar.com/webar-sdk-example/v1.7.1//aframe/surface-tracking/index.html "Live Demo"
+[surface-tracking-demo-url]: https://webar-sdk.blippar.com/webar-sdk-example/v1.7.1/aframe/surface-tracking/index.html "Live Demo"
 [surface-tracking-demo-gif]: https://github.com/blippar/webar-sdk-example/raw/main/assets/surface_tracking_demo.gif "Surface Tracking"
 [surface-tracking-qrcode]: https://github.com/blippar/webar-sdk-example/raw/main/assets/aframe-surface-tracking-qrcode.png "QR Code"
 
