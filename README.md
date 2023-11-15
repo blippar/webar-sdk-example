@@ -13,12 +13,12 @@ Supports Android Chrome and iOS Safari.
 |![QR Code][face-tracking-basics-qrcode]  | ![QR Code][face-trynow-qrcode]  |
 
 [face-tracking-basics-url]: https://webar-sdk.blippar.com/webar-sdk-example/latest/aframe/face-tracking/index.html "Live Demo"
-[face-tracking-basics-gif]: https://github.com/blippar/webar-sdk-example/raw/main/assets/face-tracking-basics-3.gif "Face Tracking"
-[face-tracking-basics-qrcode]: https://github.com/blippar/webar-sdk-example/raw/main/assets/face-tracking-qrcode.png "QR Code"
+[face-tracking-basics-gif]: https://webar-sdk.blippar.com/webar-sdk-example/assets/face-tracking-basics-3.gif "Face Tracking"
+[face-tracking-basics-qrcode]: https://webar-sdk.blippar.com/webar-sdk-example/assets/face-tracking-qrcode.png "QR Code"
 
 [face-trynow-url]: https://webar-sdk.blippar.com/webar-sdk-example/latest/aframe/face-tracking/face-trynow.html "Live Demo"
-[face-trynow-gif]: https://github.com/blippar/webar-sdk-example/raw/main/assets/face-trynow-3.gif "Face - Try Now!"
-[face-trynow-qrcode]: https://github.com/blippar/webar-sdk-example/raw/main/assets/face-trynow-qrcode.png "QR Code"
+[face-trynow-gif]: https://webar-sdk.blippar.com/webar-sdk-example/assets/face-trynow-3.gif "Face - Try Now!"
+[face-trynow-qrcode]: https://webar-sdk.blippar.com/webar-sdk-example/assets/face-trynow-qrcode.png "QR Code"
 
 
 | surface-tracking  | portal-webar | marker-tracking |
@@ -29,16 +29,16 @@ Supports Android Chrome and iOS Safari.
 |![QR Code][surface-tracking-qrcode]  | ![QR Code][portal-webar-qrcode]  | ![QR Code][marker-tracking-qrcode]  |
 
 [surface-tracking-demo-url]: https://webar-sdk.blippar.com/webar-sdk-example/v1.7.1//aframe/surface-tracking/index.html "Live Demo"
-[surface-tracking-demo-gif]: https://github.com/blippar/webar-sdk-example/raw/main/assets/surface_tracking_demo.gif "Surface Tracking"
-[surface-tracking-qrcode]: https://github.com/blippar/webar-sdk-example/raw/main/assets/aframe-surface-tracking-qrcode.png "QR Code"
+[surface-tracking-demo-gif]: https://webar-sdk.blippar.com/webar-sdk-example/assets/surface_tracking_demo.gif "Surface Tracking"
+[surface-tracking-qrcode]: https://webar-sdk.blippar.com/webar-sdk-example/assets/aframe-surface-tracking-qrcode.png "QR Code"
 
 [portal-webar-demo-url]: https://webar-sdk.blippar.com/webar-sdk-example/v1.7.1/aframe/portal-webar/index.html "Live Demo"
-[portal-webar-demo-gif]: https://github.com/blippar/webar-sdk-example/raw/main/assets/portal_webar_demo.gif "Portal Webar"
-[portal-webar-qrcode]: https://github.com/blippar/webar-sdk-example/raw/main/assets/aframe-portal-webar-qrcode.png "QR Code"
+[portal-webar-demo-gif]: https://webar-sdk.blippar.com/webar-sdk-example/assets/portal_webar_demo.gif "Portal Webar"
+[portal-webar-qrcode]: https://webar-sdk.blippar.com/webar-sdk-example/assets/aframe-portal-webar-qrcode.png "QR Code"
 
 [marker-tracking-demo-url]: https://webar-sdk.blippar.com/webar-sdk-example/v1.7.1/aframe/marker-tracking/index.html "Live Demo"
-[marker-tracking-demo-gif]: https://github.com/blippar/webar-sdk-example/raw/main/assets/marker_tracking_demo.gif "Marker Tracking"
-[marker-tracking-qrcode]: https://github.com/blippar/webar-sdk-example/raw/main/assets/aframe-marker-tracking-qrcode.png "QR Code"
+[marker-tracking-demo-gif]: https://webar-sdk.blippar.com/webar-sdk-example/assets/marker_tracking_demo.gif "Marker Tracking"
+[marker-tracking-qrcode]: https://webar-sdk.blippar.com/webar-sdk-example/assets/aframe-marker-tracking-qrcode.png "QR Code"
 
 [marker-tracking-scan-images]: https://github.com/blippar/webar-sdk-example/raw/main/aframe/marker-tracking/markers/
 
@@ -52,12 +52,12 @@ Supports Android Chrome and iOS Safari.
 |![QR Code][bjs-surface-tracking-qrcode]  | ![QR Code][bjs-marker-tracking-qrcode]  |
 
 [bjs-surface-tracking-demo-url]: https://webar-sdk.blippar.com/webar-sdk-example/v1.7.1/babylon/surface-tracking/index.html "Live Demo"
-[bjs-surface-tracking-demo-img]: https://github.com/blippar/webar-sdk-example/raw/main/assets/babylon_surface_tracking_demo.gif "Surface Tracking"
-[bjs-surface-tracking-qrcode]: https://github.com/blippar/webar-sdk-example/raw/main/assets/babylon-surface-tracking-qrcode.png "QR Code"
+[bjs-surface-tracking-demo-img]: https://webar-sdk.blippar.com/webar-sdk-example/assets/babylon_surface_tracking_demo.gif "Surface Tracking"
+[bjs-surface-tracking-qrcode]: https://webar-sdk.blippar.com/webar-sdk-example/assets/babylon-surface-tracking-qrcode.png "QR Code"
 
 [bjs-marker-tracking-demo-url]: https://webar-sdk.blippar.com/webar-sdk-example/v1.7.1/babylon/marker-tracking/index.html "Live Demo"
-[bjs-marker-tracking-demo-img]: https://github.com/blippar/webar-sdk-example/raw/main/assets/babylon_marker_tracking_demo.gif "Marker Tracking"
-[bjs-marker-tracking-qrcode]: https://github.com/blippar/webar-sdk-example/raw/main/assets/babylon-marker-tracking-qrcode.png "QR Code"
+[bjs-marker-tracking-demo-img]: https://webar-sdk.blippar.com/webar-sdk-example/assets/babylon_marker_tracking_demo.gif "Marker Tracking"
+[bjs-marker-tracking-qrcode]: https://webar-sdk.blippar.com/webar-sdk-example/assets/babylon-marker-tracking-qrcode.png "QR Code"
 
 [bjs-marker-tracking-scan-images]: https://github.com/blippar/webar-sdk-example/raw/main/aframe/marker-tracking/markers/
 
@@ -74,14 +74,14 @@ Supports Android Chrome and iOS Safari.
 
 [pc-surface-tracking-demo-url]: https://webar-sdk.blippar.com/webar-sdk-example/v1.7.1/playcanvas/surface-tracking/index.html "Live Demo"
 [pc-surface-tracking-project-url]: https://playcanvas.com/project/859355/overview/surface-tracking "Project Url"
-[pc-surface-tracking-demo-img]: https://github.com/blippar/webar-sdk-example/raw/main/assets/playcanvas-surface-tracking.jpg "Surface Tracking"
-[pc-surface-tracking-qrcode]: https://github.com/blippar/webar-sdk-example/raw/main/assets/playcanvas-surface-tracking-qrcode.png "QR Code"
+[pc-surface-tracking-demo-img]: https://webar-sdk.blippar.com/webar-sdk-example/assets/playcanvas-surface-tracking.jpg "Surface Tracking"
+[pc-surface-tracking-qrcode]: https://webar-sdk.blippar.com/webar-sdk-example/assets/playcanvas-surface-tracking-qrcode.png "QR Code"
 [pc-surface-tracking-read-more]: https://github.com/blippar/webar-sdk-example/blob/main/playcanvas/README.md#surface-tracking "Read more"
 
 [pc-marker-tracking-demo-url]: https://webar-sdk.blippar.com/webar-sdk-example/v1.7.1/playcanvas/marker-tracking/index.html "Live Demo"
 [pc-marker-tracking-project-url]: https://playcanvas.com/project/859368/overview/marker-tracking "Project Url"
-[pc-marker-tracking-demo-img]: https://github.com/blippar/webar-sdk-example/raw/main/assets/playcanvas-marker-tracking.jpg "Marker Tracking"
-[pc-marker-tracking-qrcode]: https://github.com/blippar/webar-sdk-example/raw/main/assets/playcanvas-marker-tracking-qrcode.png "QR Code"
+[pc-marker-tracking-demo-img]: https://webar-sdk.blippar.com/webar-sdk-example/assets/playcanvas-marker-tracking.jpg "Marker Tracking"
+[pc-marker-tracking-qrcode]: https://webar-sdk.blippar.com/webar-sdk-example/assets/playcanvas-marker-tracking-qrcode.png "QR Code"
 [pc-marker-tracking-read-more]: https://github.com/blippar/webar-sdk-example/blob/main/playcanvas/README.md#marker-tracking "Read more"
 
 [pc-marker-tracking-scan-images]: https://github.com/blippar/webar-sdk-example/raw/main/aframe/marker-tracking/markers/
