@@ -8,12 +8,13 @@
     <title>Blippar WebAR SDK</title>
 
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.1.0/dist/aframe-extras.min.js"></script>
 
 
     <!-- Step 1: Include WebAR SDK script -->
     <!-- PS: User may overload the splash screen by passing function string to on-load parameter
          e.g. on-load = "LoadMySplash()" -->
-    <script src="https://webar-sdk.blippar.com/releases/1.7.3/webar-sdk-v1.7.3.min.js"
+    <script src="https://webar-sdk.blippar.com/releases/1.7.4/webar-sdk-v1.7.4.min.js"
       on-load=""
       webar-mode="face-tracking"
       debug-mode="false"
@@ -49,10 +50,11 @@
       <!-- Provide a valid Blippar license-key value in the key: property  -->
     <a-scene
       webar-scene="key: xxxxxxxx-1111-2222-3333-yyyyyyyyyyyy"
+      webar-raycaster="objects: .clickable; enabled: true;"
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
       loading-screen="enabled: false"
-      renderer="colorManagement: false; antialias: true; physicallyCorrectLights: false;">
+      renderer="colorManagement: true; antialias: true; physicallyCorrectLights: true;">
       <!-- Note: Setting a-scene renderer's colorManagement: true; above will reduce the face tracking fps significantly. Set it to true only when complex 3D models needs the best rendering. -->
 
         <!-- Step 3: Add webar-camera attribute to AFrame's <a-entity camera> tag -->
@@ -60,6 +62,7 @@
 
         <a-assets timeout="60000">
           <a-asset-item id="fuel_glass" src="models/Fuel-glass.glb"></a-asset-item>
+          <a-asset-item id="pumpkin" src="models/Pumpkin.glb"></a-asset-item>
           <img id="liptexture" src="images/lipmask.png" alt=""/>
         </a-assets>
 
@@ -77,13 +80,21 @@
             <!-- Add webar-loadmonitor attribute to the entities to display loading progress screen before starting the face tracking -->
             <!-- Refer API Reference documentation for more details -->
         <a-entity webar-face>
-          <a-entity gltf-model="#fuel_glass" rotation="0 0 0" position="0 0.05 0.01" scale="0.075 0.075 0.075" webar-loadmonitor="elType: glb"></a-entity>
+          <a-entity id="glass" class="clickable" gltf-model="#fuel_glass" rotation="0 0 0" position="0 0.05 0.01" scale="0.075 0.075 0.075" webar-loadmonitor="elType: glb"></a-entity>
+        </a-entity>
+
+        <a-entity webar-face-pivot>
+          <a-entity gltf-model="#pumpkin" rotation="0 30 0" position="-0.75 -0.25 1" scale="0.01 0.01 0.01" webar-loadmonitor="elType: glb"></a-entity>
         </a-entity>
       </a-scene>
 
     <!-- Refer API:Functions documentation for more details -->
     <script>
       WEBARSDK.Init();
+
+      glass.addEventListener('click', (evt)=> {
+        console.log('glass clicked event', evt);
+      });
     </script>
   </body>
 </html>
