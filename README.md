@@ -7,8 +7,8 @@ Supports Android Chrome and iOS Safari.
 ## Table of Contents
 - [AFrame Examples](#aframe-examples)
   - [Face Tracking](#face-tracking)
-  - [Surface Tracking](#surface-tracking)
-  - [Marker Tracking](#marker-tracking)
+  - [Surface Tracking](#surface-tracking--marker-tracking)
+  - [Marker Tracking](#surface-tracking--marker-tracking)
 - [BabylonJS Examples](#babylonjs-examples)
 - [Playcanvas Examples](#playcanvas-examples)
 - [Marker Images](#marker-images)
@@ -22,6 +22,8 @@ Supports Android Chrome and iOS Safari.
 | [Live Demo](https://webar-sdk.blippar.com/webar-sdk-example/latest/aframe/face-tracking/index.html) | [Live Demo](https://webar-sdk.blippar.com/webar-sdk-example/latest/aframe/face-tracking/face-trynow.html) |
 | <div align="center"><img src="https://github.com/blippar/webar-sdk-example/raw/main/assets/face-tracking-basics-3.gif" width="300" alt="Face Tracking Basic"></div> | <div align="center"><img src="https://github.com/blippar/webar-sdk-example/raw/main/assets/face-trynow-3.gif" width="300" alt="Face Tracking Advanced"></div> |
 | <div align="center"><img src="https://github.com/blippar/webar-sdk-example/raw/main/assets/face-tracking-qrcode.png" width="200" alt="QR Code"></div> | <div align="center"><img src="https://github.com/blippar/webar-sdk-example/raw/main/assets/face-trynow-qrcode.png" width="200" alt="QR Code"></div> |
+
+### Surface Tracking | Marker Tracking
 
 | Surface Tracking | Marker Tracking |
 |------------------|-----------------|
