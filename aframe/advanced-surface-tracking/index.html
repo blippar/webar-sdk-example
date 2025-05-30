@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ============================================ -->
+    <!-- ADVANCED SURFACE TRACKING INTEGRATION      -->
+    <!-- ============================================ -->
+    <!-- Professional surface tracking implementation -->
+    <!-- showcasing sophisticated SDK features       -->
+    <!-- ============================================ -->
+    
+    <meta charset="utf-8">
+    <meta name="description" content="Advanced Surface Tracking Integration - Professional WebAR implementation with sophisticated SDK features and minimal UI approach">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="author" content="Blippar">
+    <meta name="keywords" content="WebAR, Surface Tracking, Augmented Reality, Blippar SDK, AR Integration">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon.png">
+    <link rel="shortcut icon" href="assets/favicon.png">
+    
+    <title>Advanced Surface Tracking Integration - WebAR SDK</title>
+    
+    <!-- ============================================ -->
+    <!-- DEPENDENCIES                                -->
+    <!-- ============================================ -->
+    
+    <!-- A-Frame WebVR/WebXR Framework -->
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    
+    <!-- Custom Styling -->
+    <link rel="stylesheet" type="text/css" href="styles.css" media="all"/>
+    
+    <!-- Custom Progress & Error Handlers (MUST load before SDK) -->
+    <script src="custom-handlers.js"></script>
+    
+    <!-- ============================================ -->
+    <!-- WEBARSDK CONFIGURATION                      -->
+    <!-- ============================================ -->
+    
+    <!-- DIRECT SDK USAGE (replace with your SDK path) -->
+    <script src="path/to/your/webar-sdk.js"
+        on-load=""
+        on-progress="customProgressCallback"
+        on-error="customErrorCallback"
+        webar-mode="surface-tracking"
+        auto-init="true"
+        auto-start-tracking="true"
+        minimal-ui="true"
+        render-scene-on-desktop="false"
+        external-camera-stream="true"
+        debug-mode="true">
+    </script>
+</head>
+
+<body style="touch-action: none;">
+    
+    <!-- ============================================ -->
+    <!-- AFRAME AR SCENE                             -->
+    <!-- ============================================ -->
+    
+    <div id="aframe-container">
+        <a-scene 
+            id="mainScene" 
+            webar-scene="key: YOUR_LICENSE_KEY_HERE"
+            xr-mode-ui="enabled: false"
+            device-orientation-permission-ui="enabled: false"
+            renderer="antialias: true; colorManagement: true; physicallyCorrectLights: true; sortTransparentObjects: true; precision: high; logarithmicDepthBuffer: false;" 
+            raycaster="objects: .clickable" 
+            loading-screen="enabled: false" 
+            cursor="fuse: false; rayOrigin: mouse">
+            
+            <!-- AR Camera -->
+            <a-camera webar-camera></a-camera>
+
+            <!-- ============================================ -->
+            <!-- AR CONTENT STAGE                            -->
+            <!-- ============================================ -->
+            <!-- All AR content should be placed under webar-stage -->
+            
+            <a-entity webar-stage>
+                <a-entity webar-ux-control="stageCursorUX: true; userGestureRotation: true; userGestureScale: true">
+                    
+                    <!-- =============================== -->
+                    <!-- DEMO AR OBJECTS                 -->
+                    <!-- =============================== -->
+                    <!-- Replace these with your own 3D content -->
+                    
+                    <!-- Blue Cube -->
+                    <a-box 
+                        position="-1 0.5 1" 
+                        rotation="0 45 0" 
+                        color="#4CC3D9"
+                        shadow="cast: true; receive: true">
+                    </a-box>
+                    
+                    <!-- Red Sphere (clickable) -->
+                    <a-sphere 
+                        id="spheremod" 
+                        position="0 1.25 -1" 
+                        radius="1.25" 
+                        color="#EF2D5E" 
+                        class="clickable"
+                        shadow="cast: true; receive: true">
+                    </a-sphere>
+                    
+                    <!-- Yellow Cylinder -->
+                    <a-cylinder 
+                        position="1 0.75 1" 
+                        radius="0.5" 
+                        height="1.5" 
+                        color="#FFC65D"
+                        shadow="cast: true; receive: true">
+                    </a-cylinder>
+                    
+                    <!-- Green Ground Plane -->
+                    <a-plane 
+                        position="0 0 0" 
+                        rotation="-90 0 0" 
+                        width="4" 
+                        height="4" 
+                        color="#7BC8A4"
+                        shadow="receive: true">
+                    </a-plane>
+                    
+                </a-entity>
+            </a-entity>
+
+            <!-- ============================================ -->
+            <!-- LIGHTING SETUP                             -->
+            <!-- ============================================ -->
+            
+            <!-- Ambient Light -->
+            <a-entity 
+                light="type: ambient; color: #EEE; intensity: 2.1">
+            </a-entity>
+            
+            <!-- Directional Light -->
+            <a-entity 
+                light="type: directional; color: #FFF; intensity: 3.14; castShadow: false;" 
+                position="-0.5 1 1">
+            </a-entity>
+
+        </a-scene>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- LOADING & PERMISSION UI                    -->
+    <!-- ============================================ -->
+
+    <!-- Loading Screen (enhanced by custom-handlers.js) -->
+    <div id="loadingscreen" class="fullscreenflexcol showflex">
+        <div>Initializing WebAR SDK...</div>
+    </div>
+
+    <!-- Camera Permission Dialog -->
+    <div id="camperms" class="permholder hide">
+        <div>📷 Camera Access Required</div>
+        <div>We need access to your camera for this AR experience to work.</div>
+        <div id="cambutton" class="permsbutton">Grant Access</div>
+    </div>
+
+    <!-- Motion Sensor Permission Dialog (iOS) -->
+    <div id="gyroperms" class="permholder hide">
+        <div>📱 Motion Sensors Required</div>
+        <div>We need access to motion sensors for AR tracking to work properly.</div>
+        <div id="gyrobutton" class="permsbutton">Grant Access</div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- CAMERA & PERMISSION HANDLER                -->
+    <!-- ============================================ -->
+    
+    <script src="loader.js"></script>
+
+</body>
+</html> 
