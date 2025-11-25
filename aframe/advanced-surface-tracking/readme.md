@@ -217,12 +217,12 @@ loadingScreen.innerHTML = `
 
 This integration example uses the **Blippar WebAR SDK** which requires a commercial license from Blippar.
 
-- 🔑 **WebAR SDK**: Commercial license required from [Blippar Developer Portal](https://developer.blippar.com)
+- 🔑 **WebAR SDK**: Commercial license required from [Blippar Hub](https://accounts.blippar.com/signup/free)
 - 📝 **Integration Code**: This example code is provided for reference and integration purposes
 - ⚖️ **Usage**: Subject to Blippar's terms of service and licensing agreement
 
 **To use this integration:**
-1. Register at [developer.blippar.com](https://developer.blippar.com)
+1. Register at [blippar.com](https://accounts.blippar.com/signup/free)
 2. Obtain a valid license key for the WebAR SDK
 3. Download the SDK files from your developer account
 4. Replace placeholders in this integration with your SDK and license key
