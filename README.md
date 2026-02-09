@@ -27,7 +27,7 @@ Supports Android Chrome and iOS Safari.
 
 | Surface Tracking | Marker Tracking |
 |------------------|-----------------|
-| [Live Demo](https://webar-sdk.blippar.com/webar-sdk-example/v2.0.9/aframe/surface-tracking/index.html) | [Live Demo](https://webar-sdk.blippar.com/webar-sdk-example/v2.0.9/aframe/marker-tracking/index.html) |
+| [Live Demo](https://webar-sdk.blippar.com/webar-sdk-example/v2.1.0/aframe/surface-tracking/index.html) | [Live Demo](https://webar-sdk.blippar.com/webar-sdk-example/v2.1.0/aframe/marker-tracking/index.html) |
 | <div align="center"><img src="https://github.com/blippar/webar-sdk-example/raw/main/assets/surface_tracking_demo.gif" width="300" alt="Surface Tracking"></div> | <div align="center"><img src="https://github.com/blippar/webar-sdk-example/raw/main/assets/marker_tracking_demo.gif" width="300" alt="Marker Tracking"></div> |
 | <div align="center"><img src="https://github.com/blippar/webar-sdk-example/raw/main/assets/aframe-surface-tracking-qrcode.png" width="200" alt="QR Code"></div> | <div align="center"><img src="https://github.com/blippar/webar-sdk-example/raw/main/assets/aframe-marker-tracking-qrcode.png" width="200" alt="QR Code"></div> |
 
@@ -37,7 +37,7 @@ For Marker Tracking, use the [Marker Images](#marker-images) below.
 
 | Surface Tracking | Marker Tracking |
 |------------------|-----------------|
-| [Live Demo](https://webar-sdk.blippar.com/webar-sdk-example/v2.0.9/babylon/surface-tracking/index.html) | [Live Demo](https://webar-sdk.blippar.com/webar-sdk-example/v2.0.9/babylon/marker-tracking/index.html) |
+| [Live Demo](https://webar-sdk.blippar.com/webar-sdk-example/v2.1.0/babylon/surface-tracking/index.html) | [Live Demo](https://webar-sdk.blippar.com/webar-sdk-example/v2.1.0/babylon/marker-tracking/index.html) |
 | <div align="center"><img src="https://github.com/blippar/webar-sdk-example/raw/main/assets/babylon_surface_tracking_demo.gif" width="300" alt="Surface Tracking"></div> | <div align="center"><img src="https://github.com/blippar/webar-sdk-example/raw/main/assets/babylon_marker_tracking_demo.gif" width="300" alt="Marker Tracking"></div> |
 | <div align="center"><img src="https://github.com/blippar/webar-sdk-example/raw/main/assets/babylon-surface-tracking-qrcode.png" width="200" alt="QR Code"></div> | <div align="center"><img src="https://github.com/blippar/webar-sdk-example/raw/main/assets/babylon-marker-tracking-qrcode.png" width="200" alt="QR Code"></div> |
 
@@ -47,7 +47,7 @@ For Marker Tracking, use the [Marker Images](#marker-images) below.
 
 | Surface Tracking | Marker Tracking |
 |------------------|-----------------|
-| [Live Demo](https://webar-sdk.blippar.com/webar-sdk-example/v2.0.9/playcanvas/surface-tracking/index.html) | [Live Demo](https://webar-sdk.blippar.com/webar-sdk-example/v2.0.9/playcanvas/marker-tracking/index.html) |
+| [Live Demo](https://webar-sdk.blippar.com/webar-sdk-example/v2.1.0/playcanvas/surface-tracking/index.html) | [Live Demo](https://webar-sdk.blippar.com/webar-sdk-example/v2.1.0/playcanvas/marker-tracking/index.html) |
 | [Fork Project](https://playcanvas.com/project/859355/overview/surface-tracking) | [Fork Project](https://playcanvas.com/project/859368/overview/marker-tracking) |
 | [Read more](https://github.com/blippar/webar-sdk-example/blob/main/playcanvas/README.md#surface-tracking) | [Read more](https://github.com/blippar/webar-sdk-example/blob/main/playcanvas/README.md#marker-tracking) |
 | <div align="center"><img src="https://github.com/blippar/webar-sdk-example/raw/main/assets/playcanvas-surface-tracking.jpg" width="300" alt="Surface Tracking"></div> | <div align="center"><img src="https://github.com/blippar/webar-sdk-example/raw/main/assets/playcanvas-marker-tracking.jpg" width="300" alt="Marker Tracking"></div> |
